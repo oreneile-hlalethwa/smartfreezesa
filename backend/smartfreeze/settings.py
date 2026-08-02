@@ -27,6 +27,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -59,15 +60,12 @@ WSGI_APPLICATION = 'smartfreeze.wsgi.application'
 # Reusing the same MySQL credentials pattern from SABMS
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'smartfreeze_db',
-        'USER': 'root',         # same as SABMS
-        'PASSWORD': 'code123',         # update with your password
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-        },
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres.pvbgvawouubtoqwcpvab',
+        'PASSWORD': 'SamkeloK51!',
+        'HOST': 'aws-0-eu-north-1.pooler.supabase.com',
+        'PORT': '5432',
     }
 }
 
@@ -101,3 +99,5 @@ LANGUAGE_CODE = 'en-za'
 TIME_ZONE     = 'Africa/Johannesburg'
 USE_I18N      = True
 USE_TZ        = True
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
