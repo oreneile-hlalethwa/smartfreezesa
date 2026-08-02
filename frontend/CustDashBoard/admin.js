@@ -3,7 +3,7 @@
    Orders dashboard — Django API
    ════════════════════════════════ */
 
-const API = 'http://127.0.0.1:8000/api/orders/';
+const API = 'https://smartfreezesa.onrender.com/api/orders/';
 
 const STAGES = ['pending', 'confirmed', 'out_for_delivery', 'delivered'];
 const STAGE_LABELS = {

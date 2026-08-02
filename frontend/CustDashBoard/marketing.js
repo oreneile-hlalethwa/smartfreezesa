@@ -3,7 +3,7 @@
    Wired to Django REST API
    ════════════════════════════════ */
 
-const API = 'http://127.0.0.1:8000/api/marketing';
+const API = 'https://smartfreezesa.onrender.com/api/marketing';
 
 const THEMES = {
   blue:   { bg:'linear-gradient(160deg,#0a0f1a 0%,#0d1f3c 50%,#091628 100%)', tag:'rgba(26,107,255,0.25)',  tagColor:'#3d8bff', tagBorder:'rgba(26,107,255,0.4)'  },

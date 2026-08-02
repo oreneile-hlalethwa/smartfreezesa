@@ -5,7 +5,7 @@
    marketing.html
    ════════════════════════════════ */
 
-const API_AUTH = 'http://127.0.0.1:8000/api/auth/';
+const API_AUTH = 'https://smartfreezesa.onrender.com/api/auth/';
 
 /* ── Check token on every page load ── */
 (async function guardDashboard() {

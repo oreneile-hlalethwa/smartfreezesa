@@ -3,7 +3,7 @@
    Order lookup — Django API
    ════════════════════════════════ */
 
-const API = 'http://127.0.0.1:8000/api/orders/';
+const API = 'https://smartfreezesa.onrender.com';
 
 /* Pre-fill order number if coming from checkout confirmation */
 window.addEventListener('DOMContentLoaded', () => {

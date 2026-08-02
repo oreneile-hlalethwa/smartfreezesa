@@ -3,10 +3,10 @@
    Customer page — Cart, Checkout, Reviews
    ════════════════════════════════════════ */
 
-const API_PRODUCTS  = 'http://127.0.0.1:8000/api/products/shop/';
-const API_MARKETING = 'http://127.0.0.1:8000/api/marketing/?published=true';
-const API_ORDERS    = 'http://127.0.0.1:8000/api/orders/';
-const API_REVIEWS   = 'http://127.0.0.1:8000/api/reviews/';
+const API_PRODUCTS  = 'https://smartfreezesa.onrender.com/api/products/shop/';
+const API_MARKETING = 'https://smartfreezesa.onrender.com/api/marketing/?published=true';
+const API_ORDERS    = 'https://smartfreezesa.onrender.com/api/orders/';
+const API_REVIEWS   = 'https://smartfreezesa.onrender.com/api/reviews/';
 
 /* ════════════════════════════════════════
    CART STATE
