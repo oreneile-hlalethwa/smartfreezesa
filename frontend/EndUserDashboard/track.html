@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFreeze — Track Order</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="track.css">
+</head>
+<body>
+
+  <!-- TOAST -->
+  <div class="tst" id="tst"><div class="tdt"></div><span id="tmsg">Done</span></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+  <a href="customer.html" class="nav-logo">
+    <img src="images/logo.png" alt="SmartFreeze" class="nav-logo-img">
+    <span class="nav-logo-tx">SmartFreeze</span>
+  </a>
+</nav>
+
+  <!-- LOOKUP SECTION -->
+  <section class="lookup-section" id="lookupSection">
+    <div class="lookup-wrap">
+      <div class="lookup-eyebrow">Order Tracking</div>
+      <h1 class="lookup-title">TRACK YOUR<br>ORDER</h1>
+      <div class="lookup-fields">
+        <div class="lookup-field">
+          <label class="field-label">Order ID</label>
+          <input class="field-input" id="inputId" type="text" placeholder="e.g. SF-001" oninput="this.value=this.value.toUpperCase()">
+        </div>
+        <div class="lookup-field">
+          <label class="field-label">Phone Number</label>
+          <input class="field-input" id="inputPhone" type="tel" placeholder="e.g. 0821234567" onkeydown="if(event.key==='Enter')lookup()">
+        </div>
+        <button class="lookup-btn" onclick="lookup()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="15" height="15"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Track Order
+        </button>
+      </div>
+      <div class="lookup-error" id="lookupError"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <div>© 2026 SmartFreeze SA</div>
+    <div>Delivering Cold Across South Africa</div>
+  </footer>
+
+<script src="track.js"></script>

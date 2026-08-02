@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFreeze SA — Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="tst" id="tst"><div class="tdt"></div><span id="tmsg">Done</span></div>
+
+<!-- CONTACT MODAL -->
+<div class="modal-ov" id="modalOv">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-title" id="modalTitle">Contact Customer</div>
+    <div class="modal-sub" id="modalSub">Order #SF-001 · Pending</div>
+    <div class="modal-info" id="modalInfo"></div>
+    <div class="modal-label">Your message</div>
+    <textarea class="modal-textarea" id="modalMsg" placeholder="Type your message to the customer…"></textarea>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn-primary" onclick="sendMsg()">
+        <svg style="width:13px;height:13px;margin-right:6px;vertical-align:middle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Send via WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MARK DELIVERED MODAL -->
+<div class="modal-ov" id="deliverOv">
+  <div class="modal">
+    <button class="modal-close" onclick="closeDeliverModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-title">Mark as Delivered</div>
+    <div class="modal-sub" id="deliverSub">Confirm delivery for this order</div>
+    <div class="modal-info" id="deliverInfo"></div>
+    <p style="font-size:13px;color:var(--muted2);line-height:1.7;margin-bottom:20px;">This will advance the order to the next stage. Orders move: Pending → Confirmed → Out for Delivery → Delivered.</p>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeDeliverModal()">Cancel</button>
+      <button class="btn-green" onclick="confirmDeliver()">
+        <svg style="width:13px;height:13px;margin-right:6px;vertical-align:middle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Confirm Delivery
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-logo">
+  <img src="images/logo.png" alt="SmartFreeze" class="sb-logo-img">
+  <div>
+    <span class="sb-logo-tx">SmartFreeze</span>
+    <span class="sb-logo-sub">Admin Panel</span>
+  </div>
+</div>
+
+  <div class="sb-section">Main</div>
+  <ul class="sb-nav">
+    <li><a href="#" class="on">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Orders
+    </a></li>
+    <li><a href="inventory.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      Inventory
+    </a></li>
+    <li><a href="marketing.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Marketing
+    </a></li>
+  </ul>
+
+  <div class="sb-bottom">
+  <div class="sb-user">
+    <div>
+      <div class="sb-uname" id="sbAdminName">SmartFreeze SA</div>
+      <div class="sb-urole">Administrator</div>
+    </div>
+  </div>
+  <button onclick="logout()" style="
+    width:100%; margin-top:12px;
+    background:none; border:1px solid var(--border);
+    color:var(--muted); border-radius:6px;
+    padding:9px; font-size:12px; font-weight:500;
+    cursor:pointer; font-family:'Instrument Sans',sans-serif;
+    transition:all .2s;
+  " onmouseover="this.style.color='var(--red)';this.style.borderColor='rgba(232,68,90,.3)'"
+     onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">
+    Log Out
+  </button>
+</div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">Orders</div>
+      <div class="topbar-sub">Manage and track all customer orders</div>
+    </div>
+    <div class="topbar-right">
+      <div class="tb-badge"><div class="tb-dot"></div> Live</div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats" id="statsRow"></div>
+
+  <!-- Tabs -->
+  <div class="tabs-row">
+    <button class="tab-btn on" onclick="setTab('all',this)">All Orders <span class="tab-count" id="cnt-all">0</span></button>
+    <button class="tab-btn" onclick="setTab('pending',this)">Pending <span class="tab-count" id="cnt-pending">0</span></button>
+    <button class="tab-btn" onclick="setTab('confirmed',this)">Confirmed <span class="tab-count" id="cnt-confirmed">0</span></button>
+    <button class="tab-btn" onclick="setTab('out_for_delivery',this)">Out for Delivery <span class="tab-count" id="cnt-out_for_delivery">0</span></button>
+    <button class="tab-btn" onclick="setTab('delivered',this)">Delivered <span class="tab-count" id="cnt-delivered">0</span></button>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" type="text" placeholder="Search by name, order ID or product…" id="searchInput" oninput="renderTable()">
+    </div>
+    <select class="filter-select" id="payFilter" onchange="renderTable()">
+      <option value="">All payments</option>
+      <option value="cod">Cash on Delivery</option>
+      <option value="online">Online Paid</option>
+    </select>
+  </div>
+
+  <!-- Orders table -->
+  <div class="orders-wrap">
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Product</th>
+          <th>Payment</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="orderBody"></tbody>
+    </table>
+    <div class="empty-state" id="emptyState" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      <p>No orders found</p>
+    </div>
+  </div>
+
+</main>
+
+<script src="auth-guard.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

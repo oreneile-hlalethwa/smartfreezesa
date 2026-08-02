@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFreeze SA — Inventory</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="inventory.css">
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="tst" id="tst"><div class="tdt"></div><span id="tmsg">Done</span></div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="del-modal-ov" id="delOv">
+  <div class="del-modal">
+    <div class="del-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+    </div>
+    <div class="del-title">Remove Listing?</div>
+    <div class="del-sub" id="delSub">This fridge will be removed from inventory and will no longer appear on the shop page after publishing.</div>
+    <div class="del-actions">
+      <button class="btn-ghost" onclick="closeDelModal()">Cancel</button>
+      <button class="btn-danger" onclick="confirmRemove()">Remove</button>
+    </div>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-logo">
+  <img src="images/logo.png" alt="SmartFreeze" class="sb-logo-img">
+  <div>
+    <span class="sb-logo-tx">SmartFreeze</span>
+    <span class="sb-logo-sub">Admin Panel</span>
+  </div>
+</div>
+
+  <div class="sb-section">Main</div>
+  <ul class="sb-nav">
+    <li><a href="admin.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Orders
+    </a></li>
+    <li><a href="inventory.html" class="on">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      Inventory
+    </a></li>
+    <li><a href="marketing.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Marketing
+    </a></li>
+  </ul>
+
+  <div class="sb-bottom">
+  <div class="sb-user">
+    <div>
+      <div class="sb-uname" id="sbAdminName">SmartFreeze SA</div>
+      <div class="sb-urole">Administrator</div>
+    </div>
+  </div>
+  <button onclick="logout()" style="
+    width:100%; margin-top:12px;
+    background:none; border:1px solid var(--border);
+    color:var(--muted); border-radius:6px;
+    padding:9px; font-size:12px; font-weight:500;
+    cursor:pointer; font-family:'Instrument Sans',sans-serif;
+    transition:all .2s;
+  " onmouseover="this.style.color='var(--red)';this.style.borderColor='rgba(232,68,90,.3)'"
+     onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">
+    Log Out
+  </button>
+</div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">Inventory</div>
+      <div class="topbar-sub">Manage fridge listings shown on the shop page</div>
+    </div>
+    <div class="topbar-right">
+      <div id="publishStatus" class="published-badge">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--green2);display:inline-block"></span>
+        Published
+      </div>
+      <button class="btn-add" onclick="addFridge()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Fridge
+      </button>
+      <button class="btn-publish" onclick="publishAll()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Publish to Shop
+      </button>
+    </div>
+  </div>
+
+  <div class="inv-grid" id="invGrid"></div>
+
+</main>
+
+<script src="auth-guard.js"></script>
+<script src="cropper.js"></script>
+<script src="inventory.js"></script>
+</body>
+</html>

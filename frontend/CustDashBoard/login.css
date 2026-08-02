@@ -1,0 +1,178 @@
+:root {
+  --black:   #0a0a0a;
+  --black2:  #111111;
+  --black3:  #1a1a1a;
+  --black4:  #222222;
+  --white:   #f8f8f6;
+  --white2:  #e0e0dc;
+  --muted:   #666660;
+  --muted2:  #999990;
+  --blue:    #1a6bff;
+  --blue2:   #3d8bff;
+  --green:   #2da44e;
+  --red:     #e8445a;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background: var(--black); color: var(--white);
+  min-height: 100vh; display: flex; flex-direction: column;
+}
+
+.login-logo-img { height: 28px; width: auto; object-fit: contain; border-radius: 5px; }
+
+/* ── SECTION ── */
+.login-section {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 80px 24px; position: relative;
+}
+.login-section::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(26,107,255,.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.login-wrap { width: 100%; max-width: 420px; text-align: center; }
+
+/* ── NAV ── */
+.login-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center;
+  padding: 0 40px; height: 60px;
+  background: rgba(10,10,10,.85);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+.login-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+.login-logo-mk {
+  width: 28px; height: 28px; background: var(--white);
+  border-radius: 5px; display: flex; align-items: center; justify-content: center;
+}
+.login-logo-mk svg { width: 14px; height: 14px; }
+.login-logo-tx { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; }
+
+/* ── HEADINGS ── */
+.login-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--blue2); margin-bottom: 12px;
+}
+.login-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 9vw, 72px);
+  line-height: .95; letter-spacing: 2px; margin-bottom: 36px;
+}
+
+/* ── FIELDS ── */
+.login-fields { display: flex; flex-direction: column; gap: 16px; text-align: left; }
+.login-field  { display: flex; flex-direction: column; gap: 7px; }
+
+.field-label-row {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.field-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .8px;
+  text-transform: uppercase; color: var(--muted2);
+}
+.forgot-link {
+  background: none; border: none; cursor: pointer;
+  font-size: 11px; color: var(--muted); font-family: 'Instrument Sans', sans-serif;
+  transition: color .2s;
+}
+.forgot-link:hover { color: var(--blue2); }
+
+/* input wrapper */
+.field-wrap { position: relative; display: flex; align-items: center; }
+.field-icon {
+  position: absolute; left: 14px; width: 15px; height: 15px;
+  stroke: var(--muted); pointer-events: none; flex-shrink: 0;
+}
+.field-input {
+  width: 100%; background: var(--black3); border: 1px solid var(--border);
+  color: var(--white); border-radius: 8px; padding: 12px 44px 12px 42px;
+  font-size: 14px; font-family: 'Instrument Sans', sans-serif; transition: border-color .2s;
+}
+.field-input::placeholder { color: var(--muted); }
+.field-input:focus { outline: none; border-color: rgba(26,107,255,.5); background: var(--black2); }
+
+/* eye toggle */
+.field-eye {
+  position: absolute; right: 12px; background: none; border: none;
+  cursor: pointer; color: var(--muted); padding: 4px;
+  display: flex; align-items: center; transition: color .2s;
+}
+.field-eye:hover { color: var(--white2); }
+.field-eye svg  { width: 15px; height: 15px; }
+
+/* ── ERROR ── */
+.login-error {
+  font-size: 13px; color: var(--red); font-weight: 500;
+  min-height: 18px; margin-top: -4px;
+}
+
+/* ── BUTTON ── */
+.login-btn {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  background: var(--white); color: var(--black); border: none;
+  border-radius: 8px; padding: 14px; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: 'Instrument Sans', sans-serif;
+  transition: background .2s; margin-top: 4px;
+}
+.login-btn:hover    { background: var(--white2); }
+.login-btn:disabled { opacity: .6; cursor: not-allowed; }
+
+/* ── SHOP LINK ── */
+.login-shop-link {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  color: var(--muted2); text-decoration: none; font-size: 12px; font-weight: 500;
+  padding: 11px; border-radius: 8px; border: 1px solid var(--border);
+  transition: all .2s; margin-top: 4px;
+}
+.login-shop-link:hover { color: var(--white); border-color: var(--border2); background: var(--black2); }
+
+/* ── FORGOT PANEL ── */
+.forgot-back button {
+  display: flex; align-items: center; gap: 7px;
+  background: none; border: none; cursor: pointer;
+  font-size: 12px; color: var(--muted2); font-family: 'Instrument Sans', sans-serif;
+  transition: color .2s; padding: 0;
+}
+.forgot-back button:hover { color: var(--white); }
+.forgot-msg {
+  font-size: 13px; color: var(--muted2); line-height: 1.65;
+  padding: 14px; border-radius: 8px;
+  background: var(--black2); border: 1px solid var(--border);
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  display: flex; justify-content: space-between;
+  padding: 20px 40px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--muted);
+}
+
+/* ── TOAST ── */
+.tst {
+  position: fixed; bottom: 26px; right: 26px; z-index: 2000;
+  background: var(--white); color: var(--black); border-radius: 10px;
+  padding: 13px 20px; font-size: 13px; font-weight: 600;
+  transform: translateY(60px); opacity: 0;
+  transition: all .4s cubic-bezier(.34,1.4,.64,1);
+  box-shadow: 0 8px 40px rgba(0,0,0,.5);
+  display: flex; align-items: center; gap: 9px;
+}
+.tst.on { transform: translateY(0); opacity: 1; }
+.tdt    { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 480px) {
+  .page-footer { padding: 18px 20px; }
+}

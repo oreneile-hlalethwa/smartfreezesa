@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFreeze — Admin Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <div class="tst" id="tst"><div class="tdt"></div><span id="tmsg">Done</span></div>
+
+  <nav class="login-nav">
+  <div class="login-logo">
+    <img src="images/logo.png" alt="SmartFreeze" class="login-logo-img">
+    <span class="login-logo-tx">SmartFreeze</span>
+  </div>
+</nav>
+
+  <section class="login-section">
+    <div class="login-wrap">
+
+      <div class="login-eyebrow">Admin Portal</div>
+      <h1 class="login-title">SIGN IN</h1>
+
+      <!-- SIGN IN FORM -->
+      <div class="login-fields" id="loginForm">
+
+        <div class="login-field">
+          <label class="field-label">Email Address</label>
+          <div class="field-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <input class="field-input" id="inputEmail" type="email" placeholder="Enter your email address" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="login-field">
+          <div class="field-label-row">
+            <label class="field-label">Password</label>
+            <button class="forgot-link" onclick="showForgot()" type="button">Forgot password?</button>
+          </div>
+          <div class="field-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input class="field-input" id="inputPassword" type="password" placeholder="Enter your password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+            <button class="field-eye" onclick="togglePw()" type="button">
+              <svg id="eyeOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg id="eyeClosed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="login-error" id="loginError"></div>
+
+        <button class="login-btn" id="loginBtn" onclick="doLogin()">
+          <span id="loginBtnText">Sign In</span>
+          <svg id="loginSpinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none;animation:spin .8s linear infinite" width="15" height="15"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </button>
+
+        <a href="index.html" class="login-shop-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Go to Shop
+        </a>
+
+      </div>
+
+      <!-- FORGOT PASSWORD PANEL -->
+      <div class="login-fields" id="forgotForm" style="display:none">
+
+        <div class="forgot-back">
+          <button onclick="showLogin()" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Back to Sign In
+          </button>
+        </div>
+
+        <div class="forgot-msg">
+          Enter your email and we'll send a password reset link to your inbox.
+        </div>
+
+        <div class="login-field">
+          <label class="field-label">Email Address</label>
+          <div class="field-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <input class="field-input" id="forgotEmail" type="email" placeholder="Smartfreezesa@gmail.com" onkeydown="if(event.key==='Enter')sendReset()">
+          </div>
+        </div>
+
+        <div class="login-error" id="forgotError"></div>
+
+        <button class="login-btn" onclick="sendReset()">Send Reset Link</button>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <div>© 2026 SmartFreeze SA</div>
+    <div>Delivering Cold Across South Africa</div>
+  </footer>
+
+<script src="login.js"></script>
+</body>
+</html>
