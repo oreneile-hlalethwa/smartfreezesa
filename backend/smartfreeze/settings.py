@@ -15,7 +15,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',        # ← must be before staticfiles
     'django.contrib.staticfiles',
+    'cloudinary',
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
@@ -56,8 +58,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'smartfreeze.wsgi.application'
 
-# ── DATABASE ─────────────────────────────────────
-# Reusing the same MySQL credentials pattern from SABMS
+# ── DATABASE ──────────────────────────────────────
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -78,13 +79,23 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50,
 }
 
-# ── CORS (allow your frontend HTML files to call the API) ──
-CORS_ALLOW_ALL_ORIGINS = True  # tighten in production
+# ── CORS ──────────────────────────────────────────
+CORS_ALLOW_ALL_ORIGINS = True
 
-# ── STATIC & MEDIA ────────────────────────────────
+# ── STATIC ────────────────────────────────────────
 STATIC_URL  = '/static/'
-MEDIA_URL   = '/media/'
-MEDIA_ROOT  = BASE_DIR / 'media'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# ── MEDIA / CLOUDINARY ────────────────────────────
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'kstqfts2'),
+    'API_KEY':    os.environ.get('CLOUDINARY_API_KEY',    '522244746913396'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', ''),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -99,5 +110,3 @@ LANGUAGE_CODE = 'en-za'
 TIME_ZONE     = 'Africa/Johannesburg'
 USE_I18N      = True
 USE_TZ        = True
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
