@@ -8,11 +8,6 @@ from .models import Fridge
 from .serializers import FridgeSerializer, FridgeListSerializer
 
 
-# ────────────────────────────────────────────────
-#  CUSTOMER-FACING  — GET /api/products/shop/
-#  Returns only published fridges.
-#  Supports query params: grade, type, max_price
-# ────────────────────────────────────────────────
 class ShopListView(APIView):
     def get(self, request):
         qs = Fridge.objects.filter(is_published=True)
@@ -35,11 +30,6 @@ class ShopListView(APIView):
         return Response(serializer.data)
 
 
-# ────────────────────────────────────────────────
-#  ADMIN — GET/POST  /api/products/
-#  GET  → all fridges (published + drafts)
-#  POST → create new fridge (multipart for image)
-# ────────────────────────────────────────────────
 class FridgeListCreateView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
 
@@ -56,9 +46,6 @@ class FridgeListCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# ────────────────────────────────────────────────
-#  ADMIN — GET/PATCH/DELETE  /api/products/<id>/
-# ────────────────────────────────────────────────
 class FridgeDetailView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
 
@@ -79,35 +66,28 @@ class FridgeDetailView(APIView):
 
     def delete(self, request, pk):
         fridge = get_object_or_404(Fridge, pk=pk)
-        if fridge.image:
-            fridge.image.delete(save=False)
+        try:
+            if fridge.image:
+                fridge.image.delete(save=False)
+            if fridge.image2:
+                fridge.image2.delete(save=False)
+        except Exception:
+            pass
         fridge.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# ────────────────────────────────────────────────
-#  ADMIN — POST /api/products/publish/
-#  Marks ALL fridges as published in one shot
-#  (mirrors the "Publish to Shop" button)
-# ────────────────────────────────────────────────
 class PublishAllView(APIView):
     def post(self, request):
-        # Optional: accept a list of IDs to publish selectively
         ids = request.data.get('ids')
         if ids:
             qs = Fridge.objects.filter(pk__in=ids)
         else:
             qs = Fridge.objects.all()
-
         count = qs.update(is_published=True)
         return Response({'published': count, 'message': f'{count} fridges now live on shop'})
 
 
-# ────────────────────────────────────────────────
-#  ADMIN — POST /api/products/<id>/upload-image/
-#  Separate endpoint for image-only updates
-#  (matches the card's "Upload Photo" flow)
-# ────────────────────────────────────────────────
 class FridgeImageUploadView(APIView):
     parser_classes = [MultiPartParser, FormParser]
 
@@ -116,14 +96,13 @@ class FridgeImageUploadView(APIView):
         image  = request.FILES.get('image')
         if not image:
             return Response({'error': 'No image provided'}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Delete old image from disk
-        if fridge.image:
-            fridge.image.delete(save=False)
-
+        try:
+            if fridge.image:
+                fridge.image.delete(save=False)
+        except Exception:
+            pass
         fridge.image = image
         fridge.save(update_fields=['image'])
-
         serializer = FridgeSerializer(fridge, context={'request': request})
         return Response({
             'image_url': serializer.data['image_url'],
@@ -131,10 +110,6 @@ class FridgeImageUploadView(APIView):
         })
 
 
-# ────────────────────────────────────────────────
-#  ADMIN — POST /api/products/<id>/upload-image2/
-#  Second photo upload endpoint
-# ────────────────────────────────────────────────
 class FridgeImage2UploadView(APIView):
     parser_classes = [MultiPartParser, FormParser]
 
@@ -143,13 +118,13 @@ class FridgeImage2UploadView(APIView):
         image  = request.FILES.get('image')
         if not image:
             return Response({'error': 'No image provided'}, status=status.HTTP_400_BAD_REQUEST)
-
-        if fridge.image2:
-            fridge.image2.delete(save=False)
-
+        try:
+            if fridge.image2:
+                fridge.image2.delete(save=False)
+        except Exception:
+            pass
         fridge.image2 = image
         fridge.save(update_fields=['image2'])
-
         serializer = FridgeSerializer(fridge, context={'request': request})
         return Response({
             'image_url': serializer.data['image2_url'],
