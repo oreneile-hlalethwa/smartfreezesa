@@ -4,7 +4,7 @@
    Supports 2 photos per fridge
    ════════════════════════════════ */
 
-const API = 'https://smartfreezesa.onrender.com/api/products';
+const API = `${BASE_URL}/api/products`;
 
 let FRIDGES = [];
 

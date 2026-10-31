@@ -1,8 +1,16 @@
 from django.urls import path
-from . import views
+from .views import (
+    OrderListCreateView,
+    OrderDetailView,
+    ReviewListCreateView,
+    PayFastInitiateView,
+    PayFastNotifyView,
+)
 
 urlpatterns = [
-    path('',                        views.OrderListCreateView.as_view(), name='order-list-create'),
-    path('<str:order_number>/',     views.OrderDetailView.as_view(),     name='order-detail'),
-    path('reviews/',                views.ReviewListCreateView.as_view(),name='review-list-create'),  # note: registered separately in root urls
+    path('',                        OrderListCreateView.as_view()),
+    path('<str:order_number>/',     OrderDetailView.as_view()),
+    path('reviews/',                ReviewListCreateView.as_view()),
+    path('payfast/initiate/',       PayFastInitiateView.as_view()),
+    path('payfast/notify/',         PayFastNotifyView.as_view()),
 ]

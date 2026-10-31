@@ -6,6 +6,82 @@
   <title>SmartFreeze — Student Fridges</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="smartfreeze.css">
+  <style>
+    /* ── MARKETING SLIDE — plain card ── */
+    .mkt-slide {
+      background: linear-gradient(145deg, #0d1b3e 0%, #102040 60%, #0a1628 100%) !important;
+      border: 1px solid rgba(26,107,255,0.25) !important;
+      border-radius: 16px !important;
+      overflow: hidden !important;
+    }
+    .mkt-slide-img,
+    .mkt-slide-overlay { display: none !important; }
+    .mkt-slide-info {
+      position: absolute !important;
+      inset: 0 !important;
+      padding: 34px 28px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      gap: 10px;
+    }
+    .mkt-slide-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      width: fit-content;
+      margin-bottom: 0 !important;
+    }
+    .tag-blue  { color:#1a6bff; background:rgba(26,107,255,0.12);  border:1px solid rgba(26,107,255,0.3); }
+    .tag-mid   { color:#3d8bff; background:rgba(61,139,255,0.12);  border:1px solid rgba(61,139,255,0.3); }
+    .tag-light { color:#7ab8ff; background:rgba(122,184,255,0.12); border:1px solid rgba(122,184,255,0.3); }
+    .mkt-slide-num { margin-bottom: 0 !important; }
+    .mkt-slide-title {
+      font-size: clamp(30px, 4vw, 50px) !important;
+      margin-bottom: 0 !important;
+    }
+    .mkt-slide-body {
+      font-size: 13px !important;
+      line-height: 1.55 !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* ── FOOTER MOBILE — always 2 columns, never one long list ── */
+    @media (max-width: 768px) {
+      footer { padding: 40px 18px 24px !important; }
+      body footer .ftg {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 26px 18px !important;
+        margin-bottom: 26px !important;
+      }
+      body footer .ftg > .rev:first-child {
+        grid-column: 1 / -1 !important;
+      }
+      body footer .ftg > .rev:last-child {
+        grid-column: 1 / -1 !important;
+      }
+      body footer .fbt {
+        flex-direction: column !important;
+        gap: 8px !important;
+        text-align: center !important;
+        padding-top: 20px !important;
+      }
+      body footer .fd { font-size: 13px !important; line-height: 1.6 !important; }
+      body footer .fls a { font-size: 13px !important; }
+    }
+
+    /* ── MARKETING CARD MOBILE — fit text, no overflow ── */
+    @media (max-width: 768px) {
+      .mkt-slide-info { padding: 22px 18px !important; gap: 8px; }
+      .mkt-slide-title { font-size: 30px !important; }
+      .mkt-slide-body { font-size: 11.5px !important; line-height: 1.5 !important; }
+      .mkt-slide-tag { font-size: 8.5px !important; padding: 4px 9px !important; letter-spacing: 1.4px; }
+      .mkt-slide-num { font-size: 9px !important; }
+    }
+  </style>
 </head>
 <body>
 
@@ -71,20 +147,13 @@
           </div>
 
           <div class="co-section-label" style="margin-top:24px">Payment Method</div>
-          <div class="pay-tabs">
-            <button class="pay-tab on" onclick="setPayment('cod', this)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
-              Cash on Delivery
-            </button>
-            <button class="pay-tab" onclick="setPayment('online', this)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-              Card / Online
-            </button>
+          <div class="pay-card-only">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Card Payment via PayFast
           </div>
-          <input type="hidden" id="selectedPayment" value="cod">
-          <div class="cod-note" id="codNote">
+          <div class="cod-note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            Pay when your fridge is delivered. Our driver will collect payment on arrival.
+            You'll be redirected to PayFast to complete your payment securely. We accept all major cards.
           </div>
         </div>
 
@@ -99,8 +168,8 @@
             </div>
           </div>
           <button class="co-place-btn" id="placeOrderBtn" onclick="submitOrder()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            Place Order
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Pay with Card
           </button>
           <p class="co-disclaimer">By placing your order you agree to our delivery terms. Free delivery on orders over R1,500.</p>
         </div>
@@ -179,16 +248,90 @@
     <div class="hr">
       <div class="h-grade">NEW CONDITION — LIKE NEW</div>
       <div class="fv">
-        <svg viewBox="0 0 200 340" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;filter:drop-shadow(0 40px 80px rgba(26,107,255,.22))">
-          <rect x="20" y="10" width="160" height="320" rx="14" fill="#141420" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-          <rect x="20" y="10" width="160" height="130" rx="14" fill="#171728" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-          <line x1="20" y1="140" x2="180" y2="140" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-          <rect x="148" y="58" width="8" height="42" rx="4" fill="rgba(255,255,255,0.14)"/>
-          <rect x="148" y="188" width="8" height="62" rx="4" fill="rgba(255,255,255,0.14)"/>
-          <rect x="30" y="18" width="140" height="110" rx="8" fill="url(#hg)" opacity="0.35"/>
-          <defs><radialGradient id="hg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#1a6bff" stop-opacity="0.4"/><stop offset="100%" stop-color="#1a6bff" stop-opacity="0"/></radialGradient></defs>
-          <rect x="60" y="40" width="54" height="24" rx="4" fill="rgba(26,107,255,0.2)" stroke="rgba(26,107,255,0.35)" stroke-width="0.8"/>
-          <text x="87" y="56" fill="#3d8bff" font-family="monospace" font-size="9" text-anchor="middle">-18°C</text>
+        <svg viewBox="0 0 200 360" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;filter:drop-shadow(0 40px 100px rgba(26,107,255,.45)) drop-shadow(0 0 40px rgba(26,107,255,.15))">
+          <defs>
+            <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#2a2a3a"/>
+              <stop offset="40%" stop-color="#32324a"/>
+              <stop offset="100%" stop-color="#1e1e2e"/>
+            </linearGradient>
+            <linearGradient id="topGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#2e2e42"/>
+              <stop offset="40%" stop-color="#38384e"/>
+              <stop offset="100%" stop-color="#22223a"/>
+            </linearGradient>
+            <linearGradient id="shineGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.08)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </linearGradient>
+            <radialGradient id="glowInner" cx="40%" cy="30%" r="60%">
+              <stop offset="0%" stop-color="rgba(26,107,255,0.18)"/>
+              <stop offset="100%" stop-color="rgba(26,107,255,0)"/>
+            </radialGradient>
+          </defs>
+
+          <!-- Main body -->
+          <rect x="18" y="8" width="164" height="344" rx="16" fill="url(#bodyGrad)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+
+          <!-- Top freezer compartment -->
+          <rect x="18" y="8" width="164" height="148" rx="16" fill="url(#topGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <!-- Freezer bottom edge line -->
+          <rect x="18" y="148" width="164" height="3" fill="#0a0a14" rx="1"/>
+
+          <!-- Shine overlay top -->
+          <rect x="24" y="14" width="152" height="80" rx="10" fill="url(#shineGrad)"/>
+
+          <!-- Inner glow -->
+          <rect x="24" y="14" width="152" height="136" rx="10" fill="url(#glowInner)"/>
+
+          <!-- ── FREEZER INTERIOR ── -->
+          <!-- Shelf lines -->
+          <rect x="30" y="90" width="140" height="1.5" rx="1" fill="rgba(255,255,255,0.12)"/>
+          <rect x="30" y="110" width="140" height="1.5" rx="1" fill="rgba(255,255,255,0.08)"/>
+          <!-- Ice tray suggestion -->
+          <rect x="36" y="60" width="60" height="20" rx="4" fill="rgba(26,107,255,0.15)" stroke="rgba(26,107,255,0.3)" stroke-width="1"/>
+          <rect x="40" y="64" width="10" height="12" rx="2" fill="rgba(26,107,255,0.25)"/>
+          <rect x="53" y="64" width="10" height="12" rx="2" fill="rgba(26,107,255,0.25)"/>
+          <rect x="66" y="64" width="10" height="12" rx="2" fill="rgba(26,107,255,0.25)"/>
+          <rect x="79" y="64" width="10" height="12" rx="2" fill="rgba(26,107,255,0.20)"/>
+
+          <!-- Temp display -->
+          <rect x="114" y="56" width="52" height="28" rx="6" fill="rgba(26,107,255,0.18)" stroke="rgba(26,107,255,0.45)" stroke-width="1"/>
+          <text x="140" y="66" fill="#3d8bff" font-family="monospace" font-size="7" text-anchor="middle" font-weight="700">FREEZER</text>
+          <text x="140" y="78" fill="#7ab8ff" font-family="monospace" font-size="9" text-anchor="middle" font-weight="700">-18°C</text>
+
+          <!-- FREEZER HANDLE -->
+          <rect x="150" y="50" width="8" height="56" rx="4" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+
+          <!-- ── FRIDGE INTERIOR (lower) ── -->
+          <rect x="24" y="157" width="152" height="188" rx="6" fill="rgba(26,107,255,0.04)"/>
+
+          <!-- Shelves -->
+          <rect x="30" y="200" width="140" height="2" rx="1" fill="rgba(255,255,255,0.18)"/>
+          <rect x="30" y="245" width="140" height="2" rx="1" fill="rgba(255,255,255,0.14)"/>
+          <rect x="30" y="290" width="140" height="2" rx="1" fill="rgba(255,255,255,0.10)"/>
+
+          <!-- Temp display lower -->
+          <rect x="114" y="162" width="52" height="28" rx="6" fill="rgba(26,107,255,0.12)" stroke="rgba(26,107,255,0.3)" stroke-width="1"/>
+          <text x="140" y="172" fill="#3d8bff" font-family="monospace" font-size="7" text-anchor="middle" font-weight="700">FRIDGE</text>
+          <text x="140" y="184" fill="#7ab8ff" font-family="monospace" font-size="9" text-anchor="middle" font-weight="700">+4°C</text>
+
+          <!-- Fridge door items suggestion -->
+          <rect x="32" y="210" width="38" height="24" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+          <rect x="76" y="210" width="38" height="24" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+
+          <!-- FRIDGE HANDLE -->
+          <rect x="150" y="168" width="8" height="80" rx="4" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+
+          <!-- Bottom drawer suggestion -->
+          <rect x="24" y="316" width="152" height="30" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+          <rect x="80" y="326" width="40" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
+
+          <!-- Left edge highlight (3D effect) -->
+          <rect x="18" y="8" width="4" height="344" rx="2" fill="rgba(255,255,255,0.08)"/>
+
+          <!-- Top edge highlight -->
+          <rect x="22" y="8" width="156" height="3" rx="1" fill="rgba(255,255,255,0.12)"/>
         </svg>
       </div>
       <div class="h-stags">
@@ -271,27 +414,24 @@
     <div class="mkt-bg-glow"></div>
     <div class="mkt-stage" id="mktStage">
       <div class="mkt-slide" data-index="0">
-        <div class="mkt-slide-img" style="background:linear-gradient(160deg,#0a0f1a 0%,#0d1f3c 50%,#091628 100%)"><div class="mkt-slide-overlay"></div></div>
         <div class="mkt-slide-info">
-          <div class="mkt-slide-tag">QUALITY ASSURED</div>
+          <div class="mkt-slide-tag tag-blue">QUALITY ASSURED</div>
           <div class="mkt-slide-num">01</div>
           <div class="mkt-slide-title">Tested &amp;<br>Certified</div>
           <div class="mkt-slide-body">Every fridge passes a 12-point quality check. If it doesn't pass, it doesn't ship — full stop.</div>
         </div>
       </div>
       <div class="mkt-slide" data-index="1">
-        <div class="mkt-slide-img" style="background:linear-gradient(160deg,#0a0e0d 0%,#0d2218 50%,#091a10 100%)"><div class="mkt-slide-overlay"></div></div>
         <div class="mkt-slide-info">
-          <div class="mkt-slide-tag mkt-tag-green">FAST DELIVERY</div>
+          <div class="mkt-slide-tag tag-mid">FAST DELIVERY</div>
           <div class="mkt-slide-num">02</div>
           <div class="mkt-slide-title">48h<br>Delivery</div>
           <div class="mkt-slide-body">Order before noon and your fridge arrives within 48 hours. Joburg, Pretoria, Cape Town, Durban.</div>
         </div>
       </div>
       <div class="mkt-slide" data-index="2">
-        <div class="mkt-slide-img" style="background:linear-gradient(160deg,#0f0a00 0%,#2a1800 50%,#1a1000 100%)"><div class="mkt-slide-overlay"></div></div>
         <div class="mkt-slide-info">
-          <div class="mkt-slide-tag mkt-tag-gold">STUDENT DEALS</div>
+          <div class="mkt-slide-tag tag-light">STUDENT DEALS</div>
           <div class="mkt-slide-num">03</div>
           <div class="mkt-slide-title">Prices From<br>R500</div>
           <div class="mkt-slide-body">No hidden fees, no surprises. Just the most affordable fridge deal for South African students.</div>
@@ -340,7 +480,7 @@
         </div>
       </div>
     </div>
-    <div class="fbt"><div>© 2026 SmartFreeze SA. All rights reserved.</div><div>Delivering Cold Across South Africa</div></div>
+    <div class="fbt"><div>© 2026 SmartFreeze SA. All rights reserved.</div><div><a href="terms.html" style="color:rgba(255,255,255,0.45);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:1px">Terms &amp; Conditions</a></div><div>Delivering Cold Across South Africa</div></div>
   </footer>
 
   <!-- FRIDGE MODAL -->
@@ -379,6 +519,8 @@
     </div>
   </div>
 
-  <script src="smartfreeze.js"></script>
+<script src="config.js"></script>
+<script src="smartfreeze.js"></script>
+  
 </body>
 </html>

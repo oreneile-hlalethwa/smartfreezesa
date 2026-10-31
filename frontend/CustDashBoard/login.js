@@ -3,7 +3,7 @@
    Wired to Django auth API
    ════════════════════════════════ */
 
-const API_AUTH = 'https://smartfreezesa.onrender.com/api/auth/';
+const API_AUTH = `${BASE_URL}/api/auth/`;
 
 /* redirect if already logged in */
 (async function () {

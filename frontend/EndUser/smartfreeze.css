@@ -1043,3 +1043,11 @@ footer   { background: var(--black2); border-top: 1px solid var(--border); paddi
   .cn               { font-size: 11px; }
   .cpr              { font-size: 10px; }
 }
+/* ── CARD ONLY PAYMENT ── */
+.pay-card-only {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px; border-radius: 8px;
+  background: rgba(26,107,255,.08); border: 1px solid rgba(26,107,255,.25);
+  color: var(--blue2); font-size: 13px; font-weight: 600;
+  margin-bottom: 12px;
+}

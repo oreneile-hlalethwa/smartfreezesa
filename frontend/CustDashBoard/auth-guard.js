@@ -5,7 +5,7 @@
    marketing.html
    ════════════════════════════════ */
 
-const API_AUTH = 'https://smartfreezesa.onrender.com/api/auth/';
+const API_AUTH = `${BASE_URL}/api/auth/`;
 
 /* ── Check token on every page load ── */
 (async function guardDashboard() {

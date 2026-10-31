@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Store Policy and Terms &amp; Conditions for SMART FREEZESA (PTY) LTD — sales, delivery, warranty, repairs, returns and consumer rights under South African law." />
+<title>Terms &amp; Conditions — SmartFreeze SA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #09090c;
+    --surface:   #0e0e14;
+    --surface2:  #12121a;
+    --border:    #1d1d28;
+    --border2:   #262634;
+    --accent:    #1a6bff;
+    --accent2:   #4d94ff;
+    --text:      #d7d9e0;
+    --text2:     #9a9eac;
+    --muted:     #6b7080;
+    --heading:   #ffffff;
+    --maxw:      1180px;
+    --rail:      250px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent2); }
+
+  /* ── READING PROGRESS ── */
+  #progress {
+    position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    z-index: 200; transition: width .1s linear;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(9,9,12,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar-in {
+    max-width: var(--maxw); margin: 0 auto;
+    height: 62px; padding: 0 28px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+  .brand img { height: 32px; width: auto; border-radius: 6px; }
+  .brand .fallback {
+    width: 32px; height: 32px; border-radius: 6px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: none; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #fff;
+  }
+  .brand .wordmark {
+    font-weight: 600; font-size: 15px; color: var(--heading);
+    letter-spacing: .2px;
+  }
+  .back {
+    display: inline-flex; align-items: center; gap: 7px;
+    color: var(--text2); text-decoration: none;
+    font-size: 13.5px; font-weight: 500;
+    padding: 7px 14px; border-radius: 8px;
+    border: 1px solid var(--border2);
+    transition: all .18s ease;
+  }
+  .back:hover { color: var(--heading); border-color: #39394a; background: var(--surface2); }
+  .back svg { width: 15px; height: 15px; }
+
+  /* ── DOCUMENT HEADER ── */
+  .dochead {
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(900px 300px at 15% 0%, rgba(26,107,255,.07), transparent 70%),
+      var(--bg);
+  }
+  .dochead-in { max-width: var(--maxw); margin: 0 auto; padding: 64px 28px 48px; }
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase;
+    color: var(--accent2); margin-bottom: 18px;
+  }
+  .dochead h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700; letter-spacing: -1.4px; line-height: 1.08;
+    color: var(--heading); margin-bottom: 16px;
+  }
+  .lede {
+    font-size: 16.5px; color: var(--text2);
+    max-width: 62ch; line-height: 1.65;
+  }
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px; margin-top: 38px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+  }
+  .meta div { background: var(--surface); padding: 15px 18px; }
+  .meta dt {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 5px;
+  }
+  .meta dd { font-size: 13.5px; color: var(--heading); font-weight: 500; }
+
+  /* ── LAYOUT ── */
+  .shell {
+    max-width: var(--maxw); margin: 0 auto;
+    padding: 0 28px 100px;
+    display: grid; grid-template-columns: var(--rail) 1fr; gap: 56px;
+    align-items: start;
+  }
+
+  /* ── SIDEBAR ── */
+  .rail { position: sticky; top: 94px; padding-top: 44px; }
+  .rail-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase;
+    color: var(--muted); padding: 0 10px 12px;
+    border-bottom: 1px solid var(--border); margin-bottom: 10px;
+  }
+  .rail nav {
+    max-height: calc(100vh - 190px);
+    overflow-y: auto;
+    scrollbar-width: thin; scrollbar-color: var(--border2) transparent;
+  }
+  .rail nav::-webkit-scrollbar { width: 5px; }
+  .rail nav::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+  .rail ul { list-style: none; }
+  .rail a {
+    display: flex; gap: 10px; align-items: baseline;
+    padding: 6px 10px; border-radius: 6px;
+    color: var(--muted); text-decoration: none;
+    font-size: 12.5px; line-height: 1.4;
+    border-left: 2px solid transparent;
+    transition: color .15s ease, background .15s ease;
+  }
+  .rail a .n {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; color: #43485a; min-width: 17px; flex-shrink: 0;
+  }
+  .rail a:hover { color: var(--text); background: var(--surface2); }
+  .rail a.active {
+    color: var(--accent2); background: rgba(26,107,255,.08);
+    border-left-color: var(--accent);
+  }
+  .rail a.active .n { color: var(--accent); }
+
+  /* ── MOBILE TOC ── */
+  .mtoc { display: none; }
+
+  /* ── CONTENT ── */
+  .doc { padding-top: 44px; min-width: 0; max-width: 74ch; }
+
+  .notice {
+    background: linear-gradient(135deg, rgba(26,107,255,.07), rgba(26,107,255,.02));
+    border: 1px solid rgba(26,107,255,.22);
+    border-radius: 12px; padding: 20px 24px; margin-bottom: 52px;
+  }
+  .notice strong {
+    display: block; color: var(--heading); font-size: 13px; font-weight: 600;
+    letter-spacing: .3px; margin-bottom: 7px;
+  }
+  .notice p { font-size: 14.5px; color: var(--text2); line-height: 1.68; }
+
+  .sec { margin-bottom: 52px; scroll-margin-top: 90px; }
+  .sec-head {
+    display: flex; align-items: baseline; gap: 14px;
+    margin-bottom: 18px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sec-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px; font-weight: 700; color: var(--accent);
+    flex-shrink: 0; padding-top: 3px;
+  }
+  .sec-head h2 {
+    font-size: 20px; font-weight: 650; color: var(--heading);
+    letter-spacing: -.4px; line-height: 1.3;
+  }
+
+  .sec-body p { margin-bottom: 14px; color: var(--text); }
+  .sec-body p:last-child { margin-bottom: 0; }
+
+  .sec-body ul { list-style: none; margin: 14px 0 16px; }
+  .sec-body ul li {
+    position: relative; padding-left: 20px; margin-bottom: 9px; color: var(--text);
+  }
+  .sec-body ul li::before {
+    content: ''; position: absolute; left: 2px; top: 11px;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent); opacity: .75;
+  }
+  .sec-body ol { margin: 14px 0 16px; padding-left: 20px; }
+  .sec-body ol li { margin-bottom: 9px; color: var(--text); padding-left: 4px; }
+  .sec-body ol li::marker {
+    color: var(--accent); font-family: 'Space Mono', monospace; font-size: 12px;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: rgba(26,107,255,.05);
+    border: 1px solid rgba(26,107,255,.18);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px; margin: 18px 0;
+    font-size: 14.5px; color: var(--text2); line-height: 1.65;
+  }
+  .callout strong {
+    display: block; color: var(--heading);
+    font-size: 12.5px; font-weight: 600;
+    letter-spacing: .4px; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .callout.warn {
+    background: rgba(255,176,32,.05);
+    border-color: rgba(255,176,32,.2);
+    border-left-color: #ffb020;
+  }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    margin: 18px 0; border: 1px solid var(--border);
+    border-radius: 10px; overflow-x: auto;
+  }
+  .grade-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 520px; }
+  .grade-table th {
+    background: var(--surface2); color: var(--text2);
+    text-align: left; padding: 12px 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase;
+    font-weight: 400; border-bottom: 1px solid var(--border);
+  }
+  .grade-table td {
+    padding: 14px 16px; border-bottom: 1px solid var(--border);
+    vertical-align: top; color: var(--text2); line-height: 1.6;
+  }
+  .grade-table tr:last-child td { border-bottom: none; }
+  .grade-table td:first-child {
+    font-weight: 600; color: var(--heading); white-space: nowrap;
+  }
+
+
+  /* ── TABLE → CARDS ON PHONES ── */
+  @media (max-width: 680px) {
+    .table-wrap { border: none; border-radius: 0; overflow: visible; margin: 16px 0; }
+    .grade-table { min-width: 0; display: block; font-size: 14px; }
+    .grade-table thead { display: none; }
+    .grade-table tbody, .grade-table tr, .grade-table td { display: block; width: 100%; }
+    .grade-table tr {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px 0 6px;
+      margin-bottom: 12px;
+    }
+    .grade-table tr:last-child { margin-bottom: 0; }
+    .grade-table td {
+      border-bottom: none !important;
+      padding: 9px 16px;
+      white-space: normal !important;
+    }
+    .grade-table td[data-label="Grade"] {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--accent2) !important;
+      border-bottom: 1px solid var(--border) !important;
+      padding: 12px 16px; margin-bottom: 4px;
+    }
+    .grade-table td[data-label="Grade"]::before { display: none; }
+    .grade-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 9.5px; letter-spacing: 1.3px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 5px;
+    }
+  }
+
+  /* ── BACK TO TOP ── */
+  #totop {
+    position: fixed; right: 26px; bottom: 26px; z-index: 90;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--surface2); border: 1px solid var(--border2);
+    color: var(--text2); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: all .22s ease;
+  }
+  #totop.show { opacity: 1; pointer-events: auto; }
+  #totop:hover { color: var(--heading); border-color: var(--accent); background: rgba(26,107,255,.12); }
+  #totop svg { width: 17px; height: 17px; }
+
+  /* ── FOOTER ── */
+  .docfoot { border-top: 1px solid var(--border); background: var(--surface); }
+  .docfoot-in {
+    max-width: var(--maxw); margin: 0 auto; padding: 36px 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 20px; flex-wrap: wrap;
+  }
+  .docfoot p { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+  .docfoot strong { color: var(--text2); font-weight: 600; }
+  .docfoot a { color: var(--text2); text-decoration: none; }
+  .docfoot a:hover { color: var(--accent2); }
+
+  /* ── TABLET ── */
+  @media (max-width: 1000px) {
+    .shell { grid-template-columns: 1fr; gap: 0; }
+    .rail { display: none; }
+    .doc { padding-top: 32px; max-width: 100%; }
+    .mtoc { display: block; margin-bottom: 40px; }
+    .mtoc summary {
+      cursor: pointer; list-style: none;
+      padding: 15px 18px; border: 1px solid var(--border);
+      border-radius: 10px; background: var(--surface);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase;
+      color: var(--text2);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .mtoc summary::-webkit-details-marker { display: none; }
+    .mtoc summary::after { content: '+'; font-size: 16px; color: var(--accent); }
+    .mtoc[open] summary { border-radius: 10px 10px 0 0; border-bottom: none; }
+    .mtoc[open] summary::after { content: '−'; }
+    .mtoc-body {
+      border: 1px solid var(--border); border-top: none;
+      border-radius: 0 0 10px 10px; background: var(--surface);
+      padding: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px 10px;
+    }
+    .mtoc-body a {
+      display: flex; gap: 8px; align-items: baseline;
+      padding: 7px 8px; border-radius: 5px;
+      color: var(--text2); text-decoration: none; font-size: 12px; line-height: 1.35;
+    }
+    .mtoc-body a .n {
+      font-family: 'Space Mono', monospace; font-size: 9.5px;
+      color: #43485a; min-width: 15px; flex-shrink: 0;
+    }
+    .mtoc-body a:active { background: rgba(26,107,255,.1); }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    body { font-size: 14.5px; }
+    .topbar-in { height: 56px; padding: 0 18px; }
+    .brand .wordmark { font-size: 14px; }
+    .back { font-size: 12.5px; padding: 6px 11px; }
+    .back span { display: none; }
+
+    .dochead-in { padding: 40px 18px 32px; }
+    .dochead h1 { font-size: 29px; letter-spacing: -.9px; }
+    .lede { font-size: 15px; }
+    .meta { grid-template-columns: 1fr; margin-top: 28px; }
+    .meta div { padding: 13px 16px; }
+
+    .shell { padding: 0 18px 70px; }
+    .doc { padding-top: 26px; }
+
+    .notice { padding: 16px 18px; margin-bottom: 36px; }
+    .notice p { font-size: 13.5px; }
+
+    .mtoc-body { grid-template-columns: 1fr; }
+
+    .sec { margin-bottom: 40px; }
+    .sec-head { gap: 11px; margin-bottom: 15px; }
+    .sec-head h2 { font-size: 17px; letter-spacing: -.3px; }
+    .sec-num { font-size: 11px; }
+    .sec-body p, .sec-body ul li, .sec-body ol li { font-size: 14.5px; }
+
+    .callout { padding: 14px 16px; font-size: 13.5px; }
+    .grade-table { font-size: 13px; }
+    .grade-table th, .grade-table td { padding: 11px 13px; }
+
+    #totop { right: 16px; bottom: 16px; width: 38px; height: 38px; }
+    .docfoot-in { padding: 28px 18px; flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    :root { --bg:#fff; --text:#111; --text2:#333; --heading:#000; --border:#ccc; }
+    body { background:#fff; color:#111; font-size: 10.5pt; }
+    .topbar, .rail, .mtoc, #totop, #progress, .back { display: none !important; }
+    .shell { display: block; max-width: 100%; padding: 0; }
+    .doc { max-width: 100%; padding-top: 0; }
+    .dochead { background: none; border-bottom: 2px solid #000; }
+    .dochead-in { padding: 0 0 18pt; }
+    .sec { page-break-inside: avoid; margin-bottom: 18pt; }
+    .sec-head h2, .dochead h1 { color: #000; }
+    .callout, .notice { border: 1px solid #999; background: #f6f6f6; color: #111; }
+    a { color: #000; text-decoration: underline; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar-in">
+    <a href="index.html" class="brand">
+      <img src="images/logo.png" alt="SmartFreeze SA"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="fallback">SF</div>
+      <span class="wordmark">SmartFreeze SA</span>
+    </a>
+    <a href="index.html" class="back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span>Back to Shop</span>
+    </a>
+  </div>
+</header>
+
+<!-- DOCUMENT HEADER -->
+<div class="dochead">
+  <div class="dochead-in">
+    <div class="eyebrow">Legal Document</div>
+    <h1>Store Policy &amp;<br>Terms of Sale</h1>
+    <p class="lede">How SmartFreeze SA sells, grades, delivers, warranties and supports its
+       products — and the rights you hold as a customer under South African law.</p>
+    <dl class="meta">
+      <div><dt>Issued by</dt><dd>SMART FREEZESA (PTY) LTD</dd></div>
+      <div><dt>Version</dt><dd>3.0</dd></div>
+      <div><dt>Effective</dt><dd>6 September 2026</dd></div>
+      <div><dt>Jurisdiction</dt><dd>Republic of South Africa</dd></div>
+    </dl>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="rail">
+    <div class="rail-label">Contents</div>
+    <nav id="rail-nav">
+      <ul>
+        <li><a href="#s1" data-sec="s1"><span class="n">1</span><span class="t">Purpose and Scope</span></a></li>
+        <li><a href="#s2" data-sec="s2"><span class="n">2</span><span class="t">Product Categories and Condition Grading</span></a></li>
+        <li><a href="#s3" data-sec="s3"><span class="n">3</span><span class="t">Product Descriptions and Disclosed Characteristics</span></a></li>
+        <li><a href="#s4" data-sec="s4"><span class="n">4</span><span class="t">Individual Appliance Identification</span></a></li>
+        <li><a href="#s5" data-sec="s5"><span class="n">5</span><span class="t">Pre-Delivery Testing</span></a></li>
+        <li><a href="#s6" data-sec="s6"><span class="n">6</span><span class="t">Pricing, Quotations and Promotions</span></a></li>
+        <li><a href="#s7" data-sec="s7"><span class="n">7</span><span class="t">Payment Terms</span></a></li>
+        <li><a href="#s8" data-sec="s8"><span class="n">8</span><span class="t">Order Confirmation and Stock Allocation</span></a></li>
+        <li><a href="#s9" data-sec="s9"><span class="n">9</span><span class="t">Delivery Policy</span></a></li>
+        <li><a href="#s10" data-sec="s10"><span class="n">10</span><span class="t">Delivery Inspection and Acceptance</span></a></li>
+        <li><a href="#s11" data-sec="s11"><span class="n">11</span><span class="t">Customer Responsibility for Use and Care</span></a></li>
+        <li><a href="#s12" data-sec="s12"><span class="n">12</span><span class="t">Warranty and Statutory Consumer Rights</span></a></li>
+        <li><a href="#s13" data-sec="s13"><span class="n">13</span><span class="t">How to Submit a Warranty or Product Complaint</span></a></li>
+        <li><a href="#s14" data-sec="s14"><span class="n">14</span><span class="t">Damage After Delivery</span></a></li>
+        <li><a href="#s15" data-sec="s15"><span class="n">15</span><span class="t">Distinguishing Damage from Other Reported Faults</span></a></li>
+        <li><a href="#s16" data-sec="s16"><span class="n">16</span><span class="t">Repairs and Service Process</span></a></li>
+        <li><a href="#s17" data-sec="s17"><span class="n">17</span><span class="t">Repair Estimates and Authorisation</span></a></li>
+        <li><a href="#s18" data-sec="s18"><span class="n">18</span><span class="t">Administrative, Diagnostic, Transport and Service Charges</span></a></li>
+        <li><a href="#s19" data-sec="s19"><span class="n">19</span><span class="t">Repair Discounts, Goodwill and Special Arrangements</span></a></li>
+        <li><a href="#s20" data-sec="s20"><span class="n">20</span><span class="t">Unauthorised Repairs and Third-Party Intervention</span></a></li>
+        <li><a href="#s21" data-sec="s21"><span class="n">21</span><span class="t">Normal Operating Sounds</span></a></li>
+        <li><a href="#s22" data-sec="s22"><span class="n">22</span><span class="t">Electrical, Environmental and External Conditions</span></a></li>
+        <li><a href="#s23" data-sec="s23"><span class="n">23</span><span class="t">Returns and Change of Mind</span></a></li>
+        <li><a href="#s24" data-sec="s24"><span class="n">24</span><span class="t">Replacements and Exchanges</span></a></li>
+        <li><a href="#s25" data-sec="s25"><span class="n">25</span><span class="t">Delivery, Collection and Access Charges</span></a></li>
+        <li><a href="#s26" data-sec="s26"><span class="n">26</span><span class="t">Customer Communications</span></a></li>
+        <li><a href="#s27" data-sec="s27"><span class="n">27</span><span class="t">Customer Accounts and Payment Verification</span></a></li>
+        <li><a href="#s28" data-sec="s28"><span class="n">28</span><span class="t">Privacy and Personal Information</span></a></li>
+        <li><a href="#s29" data-sec="s29"><span class="n">29</span><span class="t">Fraud, Misrepresentation and Abuse of Service</span></a></li>
+        <li><a href="#s30" data-sec="s30"><span class="n">30</span><span class="t">Complaints and Resolution Process</span></a></li>
+        <li><a href="#s31" data-sec="s31"><span class="n">31</span><span class="t">Record Keeping</span></a></li>
+        <li><a href="#s32" data-sec="s32"><span class="n">32</span><span class="t">Website and Online Ordering</span></a></li>
+        <li><a href="#s33" data-sec="s33"><span class="n">33</span><span class="t">Customer Acknowledgement and Access to Policy</span></a></li>
+        <li><a href="#s34" data-sec="s34"><span class="n">34</span><span class="t">Policy Updates</span></a></li>
+        <li><a href="#s35" data-sec="s35"><span class="n">35</span><span class="t">Severability and Statutory Priority</span></a></li>
+        <li><a href="#s36" data-sec="s36"><span class="n">36</span><span class="t">Governing Law</span></a></li>
+        <li><a href="#s37" data-sec="s37"><span class="n">37</span><span class="t">Contact and Official Channels</span></a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- DOCUMENT -->
+  <main class="doc">
+
+    <div class="notice">
+      <strong>Read this alongside your transaction documents</strong>
+      <p>This policy is intended to be read together with the quotation, invoice, order
+         confirmation, product description and any written terms specifically agreed for a
+         transaction. Where applicable law gives a customer a right that cannot lawfully be
+         excluded or limited, that legal right remains applicable.</p>
+    </div>
+
+    <!-- MOBILE TOC -->
+    <details class="mtoc">
+      <summary>Contents — 37 sections</summary>
+      <div class="mtoc-body">
+        <a href="#s1" data-sec="s1"><span class="n">1</span><span class="t">Purpose and Scope</span></a>
+        <a href="#s2" data-sec="s2"><span class="n">2</span><span class="t">Product Categories and Condition Grading</span></a>
+        <a href="#s3" data-sec="s3"><span class="n">3</span><span class="t">Product Descriptions and Disclosed Characteristics</span></a>
+        <a href="#s4" data-sec="s4"><span class="n">4</span><span class="t">Individual Appliance Identification</span></a>
+        <a href="#s5" data-sec="s5"><span class="n">5</span><span class="t">Pre-Delivery Testing</span></a>
+        <a href="#s6" data-sec="s6"><span class="n">6</span><span class="t">Pricing, Quotations and Promotions</span></a>
+        <a href="#s7" data-sec="s7"><span class="n">7</span><span class="t">Payment Terms</span></a>
+        <a href="#s8" data-sec="s8"><span class="n">8</span><span class="t">Order Confirmation and Stock Allocation</span></a>
+        <a href="#s9" data-sec="s9"><span class="n">9</span><span class="t">Delivery Policy</span></a>
+        <a href="#s10" data-sec="s10"><span class="n">10</span><span class="t">Delivery Inspection and Acceptance</span></a>
+        <a href="#s11" data-sec="s11"><span class="n">11</span><span class="t">Customer Responsibility for Use and Care</span></a>
+        <a href="#s12" data-sec="s12"><span class="n">12</span><span class="t">Warranty and Statutory Consumer Rights</span></a>
+        <a href="#s13" data-sec="s13"><span class="n">13</span><span class="t">How to Submit a Warranty or Product Complaint</span></a>
+        <a href="#s14" data-sec="s14"><span class="n">14</span><span class="t">Damage After Delivery</span></a>
+        <a href="#s15" data-sec="s15"><span class="n">15</span><span class="t">Distinguishing Damage from Other Reported Faults</span></a>
+        <a href="#s16" data-sec="s16"><span class="n">16</span><span class="t">Repairs and Service Process</span></a>
+        <a href="#s17" data-sec="s17"><span class="n">17</span><span class="t">Repair Estimates and Authorisation</span></a>
+        <a href="#s18" data-sec="s18"><span class="n">18</span><span class="t">Administrative, Diagnostic, Transport and Service Charges</span></a>
+        <a href="#s19" data-sec="s19"><span class="n">19</span><span class="t">Repair Discounts, Goodwill and Special Arrangements</span></a>
+        <a href="#s20" data-sec="s20"><span class="n">20</span><span class="t">Unauthorised Repairs and Third-Party Intervention</span></a>
+        <a href="#s21" data-sec="s21"><span class="n">21</span><span class="t">Normal Operating Sounds</span></a>
+        <a href="#s22" data-sec="s22"><span class="n">22</span><span class="t">Electrical, Environmental and External Conditions</span></a>
+        <a href="#s23" data-sec="s23"><span class="n">23</span><span class="t">Returns and Change of Mind</span></a>
+        <a href="#s24" data-sec="s24"><span class="n">24</span><span class="t">Replacements and Exchanges</span></a>
+        <a href="#s25" data-sec="s25"><span class="n">25</span><span class="t">Delivery, Collection and Access Charges</span></a>
+        <a href="#s26" data-sec="s26"><span class="n">26</span><span class="t">Customer Communications</span></a>
+        <a href="#s27" data-sec="s27"><span class="n">27</span><span class="t">Customer Accounts and Payment Verification</span></a>
+        <a href="#s28" data-sec="s28"><span class="n">28</span><span class="t">Privacy and Personal Information</span></a>
+        <a href="#s29" data-sec="s29"><span class="n">29</span><span class="t">Fraud, Misrepresentation and Abuse of Service</span></a>
+        <a href="#s30" data-sec="s30"><span class="n">30</span><span class="t">Complaints and Resolution Process</span></a>
+        <a href="#s31" data-sec="s31"><span class="n">31</span><span class="t">Record Keeping</span></a>
+        <a href="#s32" data-sec="s32"><span class="n">32</span><span class="t">Website and Online Ordering</span></a>
+        <a href="#s33" data-sec="s33"><span class="n">33</span><span class="t">Customer Acknowledgement and Access to Policy</span></a>
+        <a href="#s34" data-sec="s34"><span class="n">34</span><span class="t">Policy Updates</span></a>
+        <a href="#s35" data-sec="s35"><span class="n">35</span><span class="t">Severability and Statutory Priority</span></a>
+        <a href="#s36" data-sec="s36"><span class="n">36</span><span class="t">Governing Law</span></a>
+        <a href="#s37" data-sec="s37"><span class="n">37</span><span class="t">Contact and Official Channels</span></a>
+      </div>
+    </details>
+
+      <section class="sec" id="s1">
+        <header class="sec-head">
+          <span class="sec-num">01</span>
+          <h2>Purpose and Scope</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD provides refrigerators and related appliance products to customers, including students and households. This Store Policy sets out how SMART FREEZESA (PTY) LTD handles sales, product descriptions, grading, payments, delivery, customer care, warranty support, repairs, damage, returns, refunds, exchanges, complaints and service requests.</p>
+    <p>The policy is designed to make transactions clear before purchase, to record the condition of individual appliances, and to provide a consistent process when an issue is reported after delivery. It applies to all transactions unless a written transaction-specific term lawfully varies a provision of this policy.</p>
+    <p>SMART FREEZESA (PTY) LTD operates in accordance with applicable South African law, including the Consumer Protection Act 68 of 2008 (CPA) and applicable privacy and electronic-communications requirements.</p>
+        </div>
+      </section>
+      <section class="sec" id="s2">
+        <header class="sec-head">
+          <span class="sec-num">02</span>
+          <h2>Product Categories and Condition Grading</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD uses product grades to describe the apparent condition of the specific appliance being offered. Grading is a commercial condition description and must be read together with the product listing, photographs, disclosed issues and the applicable legal quality standards.</p>
+    <div class="table-wrap"><table class="grade-table">
+      <thead>
+        <tr>
+          <th>Grade</th>
+          <th>What It Means</th>
+          <th>What to Expect</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Grade">New Condition</td>
+          <td data-label="What it means">Presented as new condition, little or no visible evidence of prior use beyond any specifically disclosed characteristic.</td>
+          <td data-label="What to expect">Clean, presentable appearance and expected basic operating condition for the product category, subject to any written disclosure and applicable law.</td>
+        </tr>
+        <tr>
+          <td data-label="Grade">A-Grade</td>
+          <td data-label="What it means">Pre-owned, reconditioned or previously used refrigerator selected because its overall cosmetic and operating condition is considered very good for its category.</td>
+          <td data-label="What to expect">Minor signs of use may be present, such as light scratches, small marks or normal age-related wear. Any material known issue will be disclosed where relevant.</td>
+        </tr>
+        <tr>
+          <td data-label="Grade">B-Grade</td>
+          <td data-label="What it means">Pre-owned, reconditioned or used refrigerator suitable for its intended purpose but with more visible signs of use than an A-Grade unit.</td>
+          <td data-label="What to expect">More noticeable scratches, dents, fading, wear or other cosmetic imperfections may be present and reflected in the price. Material disclosed limitations will be stated where relevant.</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="callout">
+      <strong>Grade Principle</strong>
+      A lower cosmetic grade does not give SMART FREEZESA (PTY) LTD permission to sell an appliance that is not reasonably suitable for its intended purpose or to remove a statutory consumer right.
+    </div>
+        </div>
+      </section>
+      <section class="sec" id="s3">
+        <header class="sec-head">
+          <span class="sec-num">03</span>
+          <h2>Product Descriptions and Disclosed Characteristics</h2>
+        </header>
+        <div class="sec-body">
+<ul>
+      <li>Product photographs are intended to represent the specific appliance where practical, but screens and lighting can affect the appearance of colours and surface marks.</li>
+      <li>Cosmetic wear that is visible or expressly disclosed is part of the described condition of a pre-owned or reconditioned appliance.</li>
+      <li>Where SMART FREEZESA (PTY) LTD knows of a material characteristic relevant to a customer decision, it may record that characteristic in the listing, quotation, invoice or written communication.</li>
+      <li>Product measurements, capacity descriptions, energy information and model specifications should be checked against the applicable manufacturer or product information where relevant.</li>
+      <li>Normal operating sounds may occur in refrigeration equipment. An unusual sound will be assessed on its actual circumstances and will not be dismissed solely because the appliance is pre-owned.</li>
+    </ul>
+        </div>
+      </section>
+      <section class="sec" id="s4">
+        <header class="sec-head">
+          <span class="sec-num">04</span>
+          <h2>Individual Appliance Identification</h2>
+        </header>
+        <div class="sec-body">
+<p>Where reasonably practicable, SMART FREEZESA (PTY) LTD records the specific refrigerator supplied by make, model, serial number and/or internal stock reference. Photographs may be taken before dispatch and at delivery. This allows the condition of the actual appliance supplied to be distinguished from photographs of other units.</p>
+    <p>The transaction record may include the product grade, sale price, delivery details, pre-delivery test results, customer confirmations, service history and photographs. These records may be used for ordinary administration, after-sales support and lawful complaint handling.</p>
+        </div>
+      </section>
+      <section class="sec" id="s5">
+        <header class="sec-head">
+          <span class="sec-num">05</span>
+          <h2>Pre-Delivery Testing</h2>
+        </header>
+        <div class="sec-body">
+<p>Before delivery, SMART FREEZESA (PTY) LTD may conduct a reasonable basic operational inspection appropriate to the appliance. Testing may include:</p>
+    <ul>
+      <li>Power-on operation</li>
+      <li>Basic cooling performance</li>
+      <li>Freezer operation where applicable</li>
+      <li>Compressor operation</li>
+      <li>Thermostat or temperature control</li>
+      <li>Door alignment and closing</li>
+      <li>Door seal condition</li>
+      <li>Visible leaks or obvious physical damage</li>
+      <li>Interior condition and accessories</li>
+      <li>Reasonable operating sounds</li>
+    </ul>
+    <p>A pre-delivery test is evidence of the condition observed at the time of testing. It does not prevent a customer from raising a later genuine defect or exercising a statutory right.</p>
+        </div>
+      </section>
+      <section class="sec" id="s6">
+        <header class="sec-head">
+          <span class="sec-num">06</span>
+          <h2>Pricing, Quotations and Promotions</h2>
+        </header>
+        <div class="sec-body">
+<ul>
+      <li>Prices are stated in South African Rand unless otherwise specified.</li>
+      <li>The applicable product price, delivery charge and separately priced service will be disclosed through the applicable listing, quotation, invoice or order confirmation.</li>
+      <li>Quotes may be subject to a stated validity period, stock availability and any conditions shown on the quote.</li>
+      <li>Promotional prices, bundle offers and discounts may have specific conditions, limited stock, closing dates or eligibility requirements, which will be communicated with the promotion.</li>
+      <li>A discretionary discount is a commercial concession and does not automatically change the underlying description or condition of the product.</li>
+      <li>Where a payment has been reversed, contested, charged back or cannot be verified, SMART FREEZESA (PTY) LTD may pause fulfilment or service while the payment status is investigated, subject to applicable law.</li>
+    </ul>
+        </div>
+      </section>
+      <section class="sec" id="s7">
+        <header class="sec-head">
+          <span class="sec-num">07</span>
+          <h2>Payment Terms</h2>
+        </header>
+        <div class="sec-body">
+<ul>
+      <li>Payment must be made using the payment method and timing stated on the quotation, invoice or order confirmation.</li>
+      <li>Proof of payment may be requested before an appliance is dispatched.</li>
+      <li>SMART FREEZESA (PTY) LTD does not automatically provide instalment plans, lay-bys or rental arrangements. Any such arrangement must be expressly agreed in writing before the transaction.</li>
+      <li>Where a deposit is accepted, the applicable deposit terms will be communicated to the customer in writing.</li>
+      <li>A customer should use the correct transaction reference where one is provided to reduce payment verification delays.</li>
+    </ul>
+        </div>
+      </section>
+      <section class="sec" id="s8">
+        <header class="sec-head">
+          <span class="sec-num">08</span>
+          <h2>Order Confirmation and Stock Allocation</h2>
+        </header>
+        <div class="sec-body">
+<p>An enquiry or quotation is not necessarily a completed sale. Stock is allocated once SMART FREEZESA (PTY) LTD has confirmed the order and the required payment or other agreed condition has been satisfied.</p>
+    <p>Where a specific appliance has been reserved, the reservation period and any conditions attached to the reservation will be communicated in writing. SMART FREEZESA (PTY) LTD may release an unconfirmed reservation after the communicated reservation period expires.</p>
+        </div>
+      </section>
+      <section class="sec" id="s9">
+        <header class="sec-head">
+          <span class="sec-num">09</span>
+          <h2>Delivery Policy</h2>
+        </header>
+        <div class="sec-body">
+<ul>
+      <li>Delivery charges, where applicable, are stated separately from the product price.</li>
+      <li>Delivery is made to the agreed location and is subject to reasonable access for the delivery team.</li>
+      <li>Campus and residence deliveries may be affected by security procedures, loading restrictions, access distances, stairs, elevators, parking arrangements, residence rules and waiting times.</li>
+      <li>The customer is responsible for providing accurate delivery information and for making the agreed delivery location reasonably accessible.</li>
+      <li>Additional delivery attempts, extended waiting, special handling, relocation, collection or other customer-requested services may attract separately disclosed charges where permitted by law.</li>
+      <li>Delivery timing may be affected by traffic, weather, security procedures, supplier delays and other circumstances reasonably outside the control of SMART FREEZESA (PTY) LTD.</li>
+    </ul>
+        </div>
+      </section>
+      <section class="sec" id="s10">
+        <header class="sec-head">
+          <span class="sec-num">10</span>
+          <h2>Delivery Inspection and Acceptance</h2>
+        </header>
+        <div class="sec-body">
+<p>Customers should inspect the refrigerator as soon as reasonably practical after delivery. The customer should check the product identity, visible physical condition, accessories, door operation and basic operational concerns and should report any concern promptly.</p>
+    <p>SMART FREEZESA (PTY) LTD may request delivery confirmation by WhatsApp, photograph, electronic acknowledgement or signature. Such confirmation records receipt and the condition observed at that time; it is not intended to waive statutory rights concerning a latent or subsequently discovered defect.</p>
+        </div>
+      </section>
+      <section class="sec" id="s11">
+        <header class="sec-head">
+          <span class="sec-num">11</span>
+          <h2>Customer Responsibility for Use and Care</h2>
+        </header>
+        <div class="sec-body">
+<ul>
+      <li>Use the refrigerator for its intended household purpose and in accordance with reasonable operating instructions.</li>
+      <li>Do not puncture, drill, cut, dismantle or interfere with refrigeration components.</li>
+      <li>Do not undertake technical repairs or modifications without appropriate authorisation where those actions may affect warranty or diagnosis.</li>
+      <li>Avoid overloading doors, shelves or fittings beyond their reasonable intended use.</li>
+      <li>Use an appropriate electrical supply and avoid unsafe electrical connections.</li>
+      <li>Keep the appliance reasonably accessible when inspection or service has been arranged.</li>
+      <li>Report serious operating concerns promptly so that the appliance can be assessed while relevant evidence is still available.</li>
+    </ul>
+        </div>
+      </section>
+      <section class="sec" id="s12">
+        <header class="sec-head">
+          <span class="sec-num">12</span>
+          <h2>Warranty and Statutory Consumer Rights</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD provides warranty support in accordance with applicable law and any additional express warranty specifically offered for the appliance. The warranty terms applicable to an individual transaction may also be stated on the invoice or product documentation.</p>
+    <p>Where the CPA or another applicable law provides a statutory remedy, SMART FREEZESA (PTY) LTD will administer the complaint and provide the remedy required by law. A product grade, prior use, customer acknowledgement or pre-delivery inspection does not by itself remove a statutory consumer right that cannot lawfully be excluded.</p>
+    <p>Where a repair is performed, any applicable legal rights relating to parts, labour or the repair itself will be observed.</p>
+        </div>
+      </section>
+      <section class="sec" id="s13">
+        <header class="sec-head">
+          <span class="sec-num">13</span>
+          <h2>How to Submit a Warranty or Product Complaint</h2>
+        </header>
+        <div class="sec-body">
+<p>A complaint should be submitted through the designated SMART FREEZESA (PTY) LTD communication channel and should include enough information for the appliance and reported issue to be identified:</p>
+    <ul>
+      <li>Customer name and contact details</li>
+      <li>Invoice/order reference</li>
+      <li>Make and model</li>
+      <li>Serial number or stock reference where available</li>
+      <li>Description of the problem</li>
+      <li>When the problem was first noticed</li>
+      <li>Photographs or videos where reasonably possible</li>
+      <li>Information about any damage, modification, movement or third-party repair relevant to the issue</li>
+    </ul>
+    <p>SMART FREEZESA (PTY) LTD may request further information and may require a reasonable opportunity to inspect or diagnose the refrigerator before determining the appropriate remedy, subject to applicable law.</p>
+        </div>
+      </section>
+      <section class="sec" id="s14">
+        <header class="sec-head">
+          <span class="sec-num">14</span>
+          <h2>Damage After Delivery</h2>
+        </header>
+        <div class="sec-body">
+<p>A refrigerator remains the customer's responsibility to handle with reasonable care after delivery. Physical damage can affect the appliance and can also affect the ability to diagnose later complaints.</p>
+    <ul>
+      <li>Puncturing or cutting refrigeration components</li>
+      <li>Damaging pipes, electrical components, compressors, doors, hinges, shelves or seals through misuse or unreasonable handling</li>
+      <li>Using unauthorised tools or methods that alter the appliance</li>
+      <li>Allowing a third party to modify or repair the appliance without appropriate authorisation</li>
+      <li>Deliberate damage, concealment of relevant damage or materially false information concerning the condition of the appliance</li>
+    </ul>
+    <p>Where SMART FREEZESA (PTY) LTD reasonably establishes that a repair is required because of customer-caused damage, the customer may be responsible for reasonable costs directly attributable to that damage, subject to applicable law and any required authorisation process.</p>
+        </div>
+      </section>
+      <section class="sec" id="s15">
+        <header class="sec-head">
+          <span class="sec-num">15</span>
+          <h2>Distinguishing Damage from Other Reported Faults</h2>
+        </header>
+        <div class="sec-body">
+<p>A refrigerator can have more than one issue. Where a customer reports a problem after physical damage has occurred, SMART FREEZESA (PTY) LTD may assess each reported issue separately. The assessment may consider:</p>
+    <ul>
+      <li>Possible pre-existing defect</li>
+      <li>Customer-caused damage</li>
+      <li>Damage-related consequence</li>
+      <li>Repair-related issue</li>
+      <li>Normal operating condition</li>
+      <li>External or electrical condition</li>
+      <li>Wear associated with ordinary use</li>
+      <li>Issue requiring further diagnosis</li>
+    </ul>
+    <p>The assessment may consider pre-delivery records, delivery photographs, complaint chronology, technician findings, repair records, product specifications and other relevant evidence. Neither a customer allegation nor a customer acknowledgement is, by itself, treated as conclusive proof of technical causation.</p>
+        </div>
+      </section>
+      <section class="sec" id="s16">
+        <header class="sec-head">
+          <span class="sec-num">16</span>
+          <h2>Repairs and Service Process</h2>
+        </header>
+        <div class="sec-body">
+<p>Where a refrigerator requires non-routine repair or service, SMART FREEZESA (PTY) LTD may use an internal or third-party technician. The customer may be asked to make the refrigerator available for inspection or collection at an agreed time. The process follows these steps:</p>
+    <ol>
+      <li>Record the reported problem.</li>
+      <li>Collect reasonable supporting evidence.</li>
+      <li>Assess or diagnose the reported condition.</li>
+      <li>Identify whether the work appears to be warranty-related, customer-caused, non-warranty, or requires further investigation.</li>
+      <li>Where required, provide an estimate and obtain the appropriate customer authorisation before chargeable repair work proceeds.</li>
+      <li>Complete the agreed work and record the repair outcome where reasonably practical.</li>
+    </ol>
+        </div>
+      </section>
+      <section class="sec" id="s17">
+        <header class="sec-head">
+          <span class="sec-num">17</span>
+          <h2>Repair Estimates and Authorisation</h2>
+        </header>
+        <div class="sec-body">
+<p>For chargeable repair or maintenance services to which applicable pre-authorisation rules apply, SMART FREEZESA (PTY) LTD will use an appropriate estimate and customer authorisation process. The estimate may identify the nature and extent of the work, parts or materials, labour, transport or call-out charges, applicable administration/service charges, validity period and any other material condition relevant to the service.</p>
+    <p>Where additional work becomes necessary after diagnosis, SMART FREEZESA (PTY) LTD may communicate the additional estimated cost and obtain the required authorisation before proceeding, except where applicable law permits another process.</p>
+        </div>
+      </section>
+      <section class="sec" id="s18">
+        <header class="sec-head">
+          <span class="sec-num">18</span>
+          <h2>Administrative, Diagnostic, Transport and Service Charges</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD may publish or quote reasonable administrative, diagnostic, technician, transport, call-out or service charges for services that fall outside an applicable statutory warranty obligation or that are requested by the customer. Charges that may apply include:</p>
+    <ul>
+      <li>Administrative handling of non-warranty service requests</li>
+      <li>Diagnostic attendance where a charge applies</li>
+      <li>Technician transport or call-out for non-warranty matters</li>
+      <li>Return visits not caused by an obligation of SMART FREEZESA (PTY) LTD</li>
+      <li>Customer-requested additional work or services</li>
+      <li>Additional delivery or collection services not included in the original order</li>
+    </ul>
+    <div class="callout warn">
+      <strong>No Unlawful Fee</strong>
+      A charge will not be used as a device to avoid a statutory consumer remedy. Where applicable law requires SMART FREEZESA (PTY) LTD to provide a remedy at its own cost, that legal obligation takes priority.
+    </div>
+        </div>
+      </section>
+      <section class="sec" id="s19">
+        <header class="sec-head">
+          <span class="sec-num">19</span>
+          <h2>Repair Discounts, Goodwill and Special Arrangements</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD may, at its discretion, provide discounts, goodwill assistance or other commercial concessions. Unless expressly stated otherwise in writing, a goodwill concession does not create a permanent entitlement to future concessions and does not necessarily represent the underlying cost incurred by SMART FREEZESA (PTY) LTD.</p>
+    <p>Any special repair arrangement, customer contribution, payment arrangement or exception should be confirmed through a recordable written communication before the agreed service is performed.</p>
+        </div>
+      </section>
+      <section class="sec" id="s20">
+        <header class="sec-head">
+          <span class="sec-num">20</span>
+          <h2>Unauthorised Repairs and Third-Party Intervention</h2>
+        </header>
+        <div class="sec-body">
+<p>Customers should not arrange technical repairs, modifications, dismantling or component replacement through third parties where doing so may affect the appliance or the ability to determine the cause of a reported issue.</p>
+    <p>Where a third party has intervened, SMART FREEZESA (PTY) LTD may assess whether the intervention caused or contributed to the reported problem. Any effect on statutory rights will be determined in accordance with applicable law.</p>
+        </div>
+      </section>
+      <section class="sec" id="s21">
+        <header class="sec-head">
+          <span class="sec-num">21</span>
+          <h2>Normal Operating Sounds</h2>
+        </header>
+        <div class="sec-body">
+<p>Refrigeration equipment may make sounds associated with compressors, fans, thermostats, refrigerant movement, vibration and cycling. Examples can include humming, clicking, cycling or vibration.</p>
+    <p>A customer who believes a sound is abnormal should report it. SMART FREEZESA (PTY) LTD may request a recording or arrange an assessment. The fact that a unit is pre-owned does not, by itself, prove that every sound is normal or abnormal.</p>
+        </div>
+      </section>
+      <section class="sec" id="s22">
+        <header class="sec-head">
+          <span class="sec-num">22</span>
+          <h2>Electrical, Environmental and External Conditions</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD may investigate whether an operational problem was caused or contributed to by circumstances outside the refrigerator, including power instability, electrical surges, unsuitable connections, improper installation, environmental conditions or customer modification. The actual circumstances and available evidence will be considered.</p>
+        </div>
+      </section>
+      <section class="sec" id="s23">
+        <header class="sec-head">
+          <span class="sec-num">23</span>
+          <h2>Returns and Change of Mind</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD will honour any return, cancellation, replacement or refund right that applies under South African law.</p>
+    <ul>
+      <li>A customer does not automatically obtain a general change-of-mind return right solely because they later prefer another model or dislike a disclosed cosmetic characteristic where no statutory right applies.</li>
+      <li>Any discretionary exchange or refund offered by SMART FREEZESA (PTY) LTD should be confirmed in writing and may have reasonable conditions.</li>
+      <li>Where an appliance must be returned or collected, the applicable return and collection process will be communicated to the customer.</li>
+      <li>Where a refund is due, the amount, method and timing will be handled in accordance with applicable law and the relevant transaction record.</li>
+    </ul>
+        </div>
+      </section>
+      <section class="sec" id="s24">
+        <header class="sec-head">
+          <span class="sec-num">24</span>
+          <h2>Replacements and Exchanges</h2>
+        </header>
+        <div class="sec-body">
+<ul>
+      <li>Where replacement is legally required or otherwise agreed, SMART FREEZESA (PTY) LTD may provide the same or a substantially equivalent product, subject to availability and applicable law.</li>
+      <li>A customer-requested upgrade may involve an applicable price difference where lawful.</li>
+      <li>A discretionary exchange based on customer preference may be subject to stock availability, transport and other disclosed conditions where permitted by law.</li>
+      <li>Every replacement or exchange may be linked to the original invoice or order for record-keeping.</li>
+    </ul>
+        </div>
+      </section>
+      <section class="sec" id="s25">
+        <header class="sec-head">
+          <span class="sec-num">25</span>
+          <h2>Delivery, Collection and Access Charges</h2>
+        </header>
+        <div class="sec-body">
+<p>Delivery charges are separate from the product price where separately stated. Customer-requested collections, additional delivery attempts, relocation, waiting, special handling or service transport may be separately charged where the charge is lawful, reasonable and disclosed.</p>
+    <p>Where applicable law requires SMART FREEZESA (PTY) LTD to bear a return or collection cost, SMART FREEZESA (PTY) LTD will do so.</p>
+        </div>
+      </section>
+      <section class="sec" id="s26">
+        <header class="sec-head">
+          <span class="sec-num">26</span>
+          <h2>Customer Communications</h2>
+        </header>
+        <div class="sec-body">
+<ul>
+      <li>Official order, warranty, complaint, repair, refund and exchange communications should be made through the designated SMART FREEZESA (PTY) LTD WhatsApp number, email or other approved written channel.</li>
+      <li>Customers should retain invoices, order confirmations and relevant written communications.</li>
+      <li>Verbal statements from a third party, technician, courier or delivery person do not automatically amend the written transaction terms unless SMART FREEZESA (PTY) LTD confirms the change in writing.</li>
+      <li>Where a representative makes a specific promise or exception, the customer may request written confirmation.</li>
+    </ul>
+        </div>
+      </section>
+      <section class="sec" id="s27">
+        <header class="sec-head">
+          <span class="sec-num">27</span>
+          <h2>Customer Accounts and Payment Verification</h2>
+        </header>
+        <div class="sec-body">
+<p>Where SMART FREEZESA (PTY) LTD uses electronic payment, card, transfer or other digital systems, payment may be subject to verification, settlement and fraud-prevention checks. SMART FREEZESA (PTY) LTD may request reasonable proof of payment or identification of the transaction where necessary for fulfilment or payment and transaction-risk prevention, subject to applicable privacy requirements.</p>
+        </div>
+      </section>
+      <section class="sec" id="s28">
+        <header class="sec-head">
+          <span class="sec-num">28</span>
+          <h2>Privacy and Personal Information</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD may process personal information reasonably necessary to provide quotations, process orders, receive payments, deliver products, communicate with customers, provide warranty or repair support, prevent fraud, keep transaction records and comply with legal obligations.</p>
+    <p>Personal information will be handled in accordance with applicable South African privacy law, including the Protection of Personal Information Act 4 of 2013 (POPIA). SMART FREEZESA (PTY) LTD may use service providers such as couriers, technicians, payment processors and communications platforms where necessary to perform the transaction, subject to appropriate controls.</p>
+    <p>Where required by law, SMART FREEZESA (PTY) LTD will provide additional information about data-subject rights, retention, complaints and contact details through its privacy notice or related website documentation.</p>
+        </div>
+      </section>
+      <section class="sec" id="s29">
+        <header class="sec-head">
+          <span class="sec-num">29</span>
+          <h2>Fraud, Misrepresentation and Abuse of Service</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD may investigate suspected fraud, deliberate damage, materially false statements, concealment of material information, manipulated evidence, unauthorised modifications or misuse of warranty and service procedures.</p>
+    <p>Where SMART FREEZESA (PTY) LTD believes a claim requires limitation, further investigation or rejection on this basis, it may communicate the relevant reason and available supporting evidence, subject to applicable law.</p>
+        </div>
+      </section>
+      <section class="sec" id="s30">
+        <header class="sec-head">
+          <span class="sec-num">30</span>
+          <h2>Complaints and Resolution Process</h2>
+        </header>
+        <div class="sec-body">
+<p>Customers are encouraged to raise service concerns directly with SMART FREEZESA (PTY) LTD so the matter can be recorded and assessed. The complaints process follows these steps:</p>
+    <ol>
+      <li>Complaint received and recorded.</li>
+      <li>Customer information and transaction details verified.</li>
+      <li>Relevant photographs, videos or other evidence requested where appropriate.</li>
+      <li>Reasonable inspection or diagnosis arranged where needed.</li>
+      <li>Cause, responsibility and available remedy assessed.</li>
+      <li>Outcome and next steps communicated in writing.</li>
+    </ol>
+    <p>This process does not prevent a customer from exercising any lawful right to approach a competent consumer authority, ombud, tribunal or court.</p>
+        </div>
+      </section>
+      <section class="sec" id="s31">
+        <header class="sec-head">
+          <span class="sec-num">31</span>
+          <h2>Record Keeping</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD may maintain transaction and service records for legitimate operational, accounting, legal, warranty and complaint-handling purposes. Records may include quotations and invoices, proof of payment, product and serial-number information, product photographs and videos, delivery confirmations, complaint records, repair and technician records, parts and transport records, refund and replacement records, relevant customer communications, and customer acknowledgements or service approvals.</p>
+    <p>Records will be retained and handled in accordance with applicable law and SMART FREEZESA (PTY) LTD record-management practices.</p>
+        </div>
+      </section>
+      <section class="sec" id="s32">
+        <header class="sec-head">
+          <span class="sec-num">32</span>
+          <h2>Website and Online Ordering</h2>
+        </header>
+        <div class="sec-body">
+<ul>
+      <li>Information displayed on the website is intended to describe products and services accurately and clearly.</li>
+      <li>Product availability can change, particularly for unique used or pre-owned units.</li>
+      <li>A website listing does not necessarily reserve an appliance until the order is confirmed by SMART FREEZESA (PTY) LTD.</li>
+      <li>Customers should review the product condition, grade, price, delivery charge and any disclosed limitations before completing a purchase.</li>
+      <li>Where a website promotion has separate terms, those terms should be read together with this Store Policy.</li>
+    </ul>
+        </div>
+      </section>
+      <section class="sec" id="s33">
+        <header class="sec-head">
+          <span class="sec-num">33</span>
+          <h2>Customer Acknowledgement and Access to Policy</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD may provide this policy to a customer through its website, quotation, invoice, WhatsApp, email, order confirmation or another reasonable channel before or at the time of the transaction.</p>
+    <p>Where SMART FREEZESA (PTY) LTD requires customer acknowledgement of specific terms, the relevant term will be presented in a clear and sufficiently prominent manner and the customer will be given a reasonable opportunity to review it before being bound, to the extent required by law.</p>
+        </div>
+      </section>
+      <section class="sec" id="s34">
+        <header class="sec-head">
+          <span class="sec-num">34</span>
+          <h2>Policy Updates</h2>
+        </header>
+        <div class="sec-body">
+<p>SMART FREEZESA (PTY) LTD may update this Store Policy from time to time to reflect changes in products, services, business processes or applicable law. An updated version will apply prospectively to new transactions from its stated effective date unless applicable law requires otherwise.</p>
+    <p>A transaction already completed remains subject to the terms and legal rights applicable to that transaction, unless the parties lawfully agree otherwise.</p>
+        </div>
+      </section>
+      <section class="sec" id="s35">
+        <header class="sec-head">
+          <span class="sec-num">35</span>
+          <h2>Severability and Statutory Priority</h2>
+        </header>
+        <div class="sec-body">
+<p>If any provision of this policy is found to be invalid, unlawful or unenforceable, that provision will be applied only to the extent lawfully permitted or, where appropriate, treated as severed without invalidating the remaining provisions.</p>
+    <p>Nothing in this Store Policy is intended to exclude, waive or restrict a consumer right, remedy or protection that cannot lawfully be excluded, waived or restricted.</p>
+        </div>
+      </section>
+      <section class="sec" id="s36">
+        <header class="sec-head">
+          <span class="sec-num">36</span>
+          <h2>Governing Law</h2>
+        </header>
+        <div class="sec-body">
+<p>Transactions with SMART FREEZESA (PTY) LTD are governed by the laws of the Republic of South Africa, subject to any mandatory consumer protections and jurisdictional rules that apply to the transaction.</p>
+        </div>
+      </section>
+      <section class="sec" id="s37">
+        <header class="sec-head">
+          <span class="sec-num">37</span>
+          <h2>Contact and Official Channels</h2>
+        </header>
+        <div class="sec-body">
+<p>Customers should use the official SMART FREEZESA (PTY) LTD contact details published on the website and on the applicable invoice, quotation or order confirmation. Customers should be cautious of third parties requesting payment using personal or unofficial payment details.</p>
+    <p>SMART FREEZESA (PTY) LTD will communicate the official payment and service instructions applicable to the transaction through its approved channels.</p>
+    <div class="callout" style="margin-top: 16px;">
+      <strong>Get in touch</strong>
+      Email: <a href="mailto:Smartfreezesa@gmail.com" style="color: var(--accent);">Smartfreezesa@gmail.com</a> &nbsp;|&nbsp;
+      Website: <a href="https://smartfreezesa.co.za" style="color: var(--accent);">smartfreezesa.co.za</a>
+    </div>
+        </div>
+      </section>
+
+  </main>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="totop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- FOOTER -->
+<footer class="docfoot">
+  <div class="docfoot-in">
+    <p>
+      <strong>SMART FREEZESA (PTY) LTD</strong> — Store Policy v3.0, effective 6 September 2026<br>
+      Governed by the laws of the Republic of South Africa · Consumer Protection Act 68 of 2008 · POPIA
+    </p>
+    <p><a href="index.html">&larr; Back to Shop</a></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // reading progress
+  var bar = document.getElementById('progress');
+  var top = document.getElementById('totop');
+  function onScroll() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    bar.style.width = pct + '%';
+    top.classList.toggle('show', h.scrollTop > 600);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  top.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // scroll-spy
+  var links = {};
+  document.querySelectorAll('#rail-nav a').forEach(function (a) {
+    links[a.getAttribute('data-sec')] = a;
+  });
+  var secs = [].slice.call(document.querySelectorAll('section.sec'));
+  var visible = {};
+  var current = null;
+
+  function setActive() {
+    // topmost section currently in the reading band wins
+    var pick = null, best = Infinity;
+    secs.forEach(function (s) {
+      if (!visible[s.id]) return;
+      var t = s.getBoundingClientRect().top;
+      if (t < best) { best = t; pick = s; }
+    });
+    if (!pick) return;
+    var a = links[pick.id];
+    if (!a || a === current) return;
+    if (current) current.classList.remove('active');
+    a.classList.add('active');
+    current = a;
+    var nav = document.getElementById('rail-nav');
+    var r = a.getBoundingClientRect(), nr = nav.getBoundingClientRect();
+    if (r.top < nr.top || r.bottom > nr.bottom) {
+      a.scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { visible[e.target.id] = e.isIntersecting; });
+    setActive();
+  }, { rootMargin: '-90px 0px -70% 0px', threshold: 0 });
+
+  secs.forEach(function (s) { io.observe(s); });
+
+  // close mobile TOC after a jump
+  var mtoc = document.querySelector('.mtoc');
+  if (mtoc) {
+    mtoc.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { mtoc.removeAttribute('open'); });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

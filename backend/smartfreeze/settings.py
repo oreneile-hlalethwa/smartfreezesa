@@ -62,12 +62,12 @@ WSGI_APPLICATION = 'smartfreeze.wsgi.application'
 # ── DATABASE ──────────────────────────────────────
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres.pvbgvawouubtoqwcpvab',
-        'PASSWORD': 'SamkeloK51!',
-        'HOST': 'aws-0-eu-north-1.pooler.supabase.com',
-        'PORT': '5432',
+        'ENGINE':   os.environ.get('DB_ENGINE', 'django.db.backends.mysql'),
+        'NAME':     os.environ.get('DB_NAME', 'smartfreeze_db'),
+        'USER':     os.environ.get('DB_USER', 'root'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'code123'),
+        'HOST':     os.environ.get('DB_HOST', 'localhost'),
+        'PORT':     os.environ.get('DB_PORT', '3306'),
     }
 }
 
@@ -106,6 +106,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
+
+# ── EMAIL ──
+EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST          = 'smtp.gmail.com'
+EMAIL_PORT          = 587
+EMAIL_USE_TLS       = True
+EMAIL_HOST_USER     = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+DEFAULT_FROM_EMAIL  = config('EMAIL_HOST_USER', default='')
 
 LANGUAGE_CODE = 'en-za'
 TIME_ZONE     = 'Africa/Johannesburg'

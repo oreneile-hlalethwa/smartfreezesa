@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFreeze — Payment Successful</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="smartfreeze.css">
+<style>
+.pay-result-page { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 24px; text-align:center; }
+.pay-result-icon { width:72px; height:72px; border-radius:50%; background:rgba(45,164,78,.12); border:1px solid rgba(45,164,78,.3); display:flex; align-items:center; justify-content:center; margin:0 auto 24px; }
+.pay-result-icon svg { width:32px; height:32px; stroke:var(--green2); }
+.pay-result-title { font-family:'Bebas Neue',sans-serif; font-size:48px; letter-spacing:2px; margin-bottom:12px; }
+.pay-result-sub { font-size:14px; color:var(--muted2); line-height:1.7; max-width:420px; margin:0 auto 32px; }
+.pay-result-num { font-family:'Space Mono',monospace; font-size:22px; color:var(--blue2); margin-bottom:32px; padding:14px 28px; background:var(--black2); border:1px solid var(--border); border-radius:10px; display:inline-block; }
+.pay-result-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.btn-track { background:var(--white); color:var(--black); border:none; border-radius:8px; padding:13px 28px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Instrument Sans',sans-serif; text-decoration:none; }
+.btn-shop  { background:none; color:var(--muted2); border:1px solid var(--border); border-radius:8px; padding:13px 28px; font-size:14px; font-weight:500; cursor:pointer; font-family:'Instrument Sans',sans-serif; text-decoration:none; transition:all .2s; }
+.btn-shop:hover { color:var(--white); border-color:var(--border2); }
+</style>
+</head>
+<body>
+<div class="pay-result-page">
+  <div class="pay-result-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div class="pay-result-title">Payment Successful!</div>
+  <div class="pay-result-sub">Your order has been confirmed and payment received. Use your order number below to track your delivery.</div>
+  <div class="pay-result-num" id="successOrderNum">—</div>
+  <div class="pay-result-btns">
+    <a class="btn-track" id="trackBtn" href="../EndUserDashboard/track.html">Track My Order</a>
+    <a class="btn-shop" href="index.html">Continue Shopping</a>
+  </div>
+</div>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const order  = params.get('order');
+  if (order) {
+    document.getElementById('successOrderNum').textContent = order;
+    document.getElementById('trackBtn').href = `../EndUserDashboard/track.html?order=${order}`;
+  }
+</script>
+</body>
+</html>

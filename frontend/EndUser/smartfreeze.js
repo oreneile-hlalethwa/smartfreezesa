@@ -3,10 +3,10 @@
    Customer page — Cart, Checkout, Reviews
    ════════════════════════════════════════ */
 
-const API_PRODUCTS  = 'https://smartfreezesa.onrender.com/api/products/shop/';
-const API_MARKETING = 'https://smartfreezesa.onrender.com/api/marketing/?published=true';
-const API_ORDERS    = 'https://smartfreezesa.onrender.com/api/orders/';
-const API_REVIEWS   = 'https://smartfreezesa.onrender.com/api/reviews/';
+const API_PRODUCTS  = `${BASE_URL}/api/products/shop/`;
+const API_MARKETING = `${BASE_URL}/api/marketing/?published=true`;
+const API_ORDERS    = `${BASE_URL}/api/orders/`;
+const API_REVIEWS   = `${BASE_URL}/api/reviews/`;
 
 /* ════════════════════════════════════════
    CART STATE
@@ -116,12 +116,6 @@ function closeCheckout() {
   document.body.style.overflow = '';
 }
 
-function setPayment(type, btn) {
-  document.querySelectorAll('.pay-tab').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-  document.getElementById('selectedPayment').value = type;
-}
-
 async function submitOrder() {
   const btn     = document.getElementById('placeOrderBtn');
   const name    = document.getElementById('coName').value.trim();
@@ -129,18 +123,18 @@ async function submitOrder() {
   const phone   = document.getElementById('coPhone').value.trim();
   const address = document.getElementById('coAddress').value.trim();
   const city    = document.getElementById('coCity').value.trim();
-  const payment = document.getElementById('selectedPayment').value;
 
   if (!name || !email || !phone || !address || !city) {
     toast('Please fill in all delivery details');
     return;
   }
 
-  btn.textContent = 'Placing Order...';
+  btn.textContent = 'Processing...';
   btn.disabled    = true;
 
   const payload = {
-    name, email, phone, address, city, payment,
+    name, email, phone, address, city,
+    payment: 'online',
     items: CART.map(i => ({
       fridge_id: i.id,
       name:      i.name,
@@ -150,6 +144,7 @@ async function submitOrder() {
   };
 
   try {
+    // Step 1 — create order
     const res  = await fetch(API_ORDERS, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -157,14 +152,40 @@ async function submitOrder() {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(JSON.stringify(data));
+
+    // Step 2 — initiate PayFast payment
+    const pfRes  = await fetch(`${BASE_URL}/api/orders/payfast/initiate/`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ order_number: data.order_number }),
+    });
+    const pfData = await pfRes.json();
+    if (!pfRes.ok) throw new Error('PayFast initiation failed');
+
+    // Step 3 — build form and submit to PayFast
     CART = [];
     updateCartUI();
     closeCheckout();
-    showOrderConfirmation(data);
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = pfData.payfast_url;
+
+    Object.entries(pfData.data).forEach(([key, val]) => {
+      const input = document.createElement('input');
+      input.type  = 'hidden';
+      input.name  = key;
+      input.value = val;
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+
   } catch (err) {
     toast('Order failed — please try again');
     console.error(err);
-    btn.textContent = 'Place Order';
+    btn.textContent = 'Pay with Card';
     btn.disabled    = false;
   }
 }
@@ -334,7 +355,9 @@ async function loadMarketing() {
   if (!stage) return;
   let slides = [];
   try { const res = await fetch(API_MARKETING); slides = res.ok ? await res.json() : []; } catch { slides = []; }
-  if (!slides.length) return;
+  // No slides from the API — keep the static slides already in the HTML and
+  // still initialise the carousel, otherwise they all stack on top of each other.
+  if (!slides.length) { initCarousel(); return; }
   stage.innerHTML = ''; pipsEl.innerHTML = '';
   slides.forEach((s, idx) => {
     const t = THEME_MAP[s.theme] || THEME_MAP.blue;

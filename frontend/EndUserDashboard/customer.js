@@ -3,7 +3,7 @@
    Order detail — reads from Django
    ════════════════════════════════ */
 
-const API = 'https://smartfreezesa.onrender.com';
+const API = `${BASE_URL}`;
 
 window.addEventListener('DOMContentLoaded', async () => {
   const raw = sessionStorage.getItem('sf_order');
