@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'products',
     'marketing',
     'orders',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -107,14 +108,12 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# ── EMAIL ──
-EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST          = 'smtp.gmail.com'
-EMAIL_PORT          = 587
-EMAIL_USE_TLS       = True
-EMAIL_HOST_USER     = config('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL  = config('EMAIL_HOST_USER', default='')
+# ── EMAIL (Brevo) ──
+EMAIL_BACKEND = 'anymail.backends.brevo.EmailBackend'
+ANYMAIL = {
+    'BREVO_API_KEY': config('BREVO_API_KEY', default=''),
+}
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='Smartfreezesa@gmail.com')
 
 LANGUAGE_CODE = 'en-za'
 TIME_ZONE     = 'Africa/Johannesburg'

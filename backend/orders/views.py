@@ -3,62 +3,28 @@ import urllib.parse
 import requests
 from decouple import config
 
-from django.core.mail import send_mail
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.core.mail import EmailMultiAlternatives
+import logging
+
+logger = logging.getLogger(__name__)
 
 from .models import Order, Review
 from .serializers import (
     OrderSerializer, OrderCreateSerializer, ReviewSerializer
 )
 
-PAYFAST_MERCHANT_ID  = config('PAYFAST_MERCHANT_ID',  default='37134085')
-PAYFAST_MERCHANT_KEY = config('PAYFAST_MERCHANT_KEY', default='ozpordlwgvtxe')
-PAYFAST_PASSPHRASE   = config('PAYFAST_PASSPHRASE',   default='SamkeloK51..')
+PAYFAST_MERCHANT_ID  = config('PAYFAST_MERCHANT_ID',  default='')
+PAYFAST_MERCHANT_KEY = config('PAYFAST_MERCHANT_KEY', default='')
+PAYFAST_PASSPHRASE   = config('PAYFAST_PASSPHRASE',   default='')
 PAYFAST_SANDBOX      = config('PAYFAST_SANDBOX',       default='False') == 'True'
 
 PAYFAST_URL = 'https://sandbox.payfast.co.za/eng/process' if PAYFAST_SANDBOX else 'https://www.payfast.co.za/eng/process'
-
-
-# ── EMAIL HELPER ──────────────────────────────────────────────────────────────
-def send_order_confirmation_email(order):
-    frontend_url  = config('FRONTEND_URL', default='https://smartfreezesa.onrender.com')
-    tracking_url  = f"{frontend_url}/frontend/EndUserDashboard/track.html?order={order.order_number}"
-
-    subject = f"SmartFreeze — Order Confirmed {order.order_number}"
-    message = f"""
-Hi {order.name},
-
-Your SmartFreeze order has been confirmed and payment received!
-
-Order Number : {order.order_number}
-Total        : R{order.total}
-Delivery     : {order.address}, {order.city}
-
-Track your order here:
-{tracking_url}
-
-Our team will contact you shortly to arrange delivery.
-
-Thank you for choosing SmartFreeze SA!
-SmartFreeze SA — Delivering Cold Across South Africa
-    """.strip()
-
-    try:
-        send_mail(
-            subject,
-            message,
-            config('EMAIL_HOST_USER', default='Smartfreezesa@gmail.com'),
-            [order.email],
-            fail_silently=False,
-        )
-        print(f"Confirmation email sent to {order.email}")
-    except Exception as e:
-        print(f"Email failed: {e}")
 
 
 # ── POST /api/orders/  → place new order
@@ -148,6 +114,76 @@ class ReviewListCreateView(APIView):
         return Response(s.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# ── order confirmation email ─────────────────────────────────
+def send_order_confirmation(order):
+    """Email the customer once PayFast confirms payment.
+
+    Never allowed to raise: the ITN webhook must still return 200 to
+    PayFast even if the mail provider is down, otherwise PayFast keeps
+    retrying the notification.
+    """
+    if not order.email:
+        return
+
+    subject = f'Order confirmed - {order.order_number} | SmartFreeze SA'
+    text = (
+        f"Hi {order.name},\n\n"
+        f"Thank you for your order. Your payment has been received and your "
+        f"order is confirmed.\n\n"
+        f"Order number: {order.order_number}\n"
+        f"Total paid: R{order.total}\n\n"
+        f"We'll be in touch shortly to arrange delivery. You can reply to this "
+        f"email or WhatsApp us on 075 359 3473 if you have any questions.\n\n"
+        f"SmartFreeze SA\n"
+        f"https://smartfreezesa.co.za/EndUser/\n"
+    )
+    html = f"""
+    <div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:0 auto;
+                color:#1a1a1a;line-height:1.6">
+      <h2 style="color:#1a6bff;margin-bottom:4px">Order confirmed</h2>
+      <p style="color:#666;margin-top:0">Thank you for your order, {order.name}.</p>
+
+      <p>Your payment has been received and your order is confirmed.</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:20px 0;
+                    border:1px solid #e5e5e5;border-radius:6px">
+        <tr>
+          <td style="padding:12px 16px;border-bottom:1px solid #eee;color:#666">Order number</td>
+          <td style="padding:12px 16px;border-bottom:1px solid #eee;
+                     font-weight:bold;text-align:right">{order.order_number}</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 16px;color:#666">Total paid</td>
+          <td style="padding:12px 16px;font-weight:bold;text-align:right">R{order.total}</td>
+        </tr>
+      </table>
+
+      <p>We'll be in touch shortly to arrange delivery.</p>
+      <p style="color:#666;font-size:14px">
+        Questions? Reply to this email or WhatsApp us on 075&nbsp;359&nbsp;3473.
+      </p>
+
+      <hr style="border:none;border-top:1px solid #eee;margin:24px 0">
+      <p style="color:#999;font-size:12px">
+        SMART FREEZESA (PTY) LTD &middot;
+        <a href="https://smartfreezesa.co.za/EndUser/terms.html"
+           style="color:#1a6bff">Terms &amp; Conditions</a>
+      </p>
+    </div>
+    """
+
+    try:
+        msg = EmailMultiAlternatives(
+            subject, text,
+            to=[order.email],
+            reply_to=[config('REPLY_TO_EMAIL', default='smartfreezesa@gmail.com')],
+        )
+        msg.attach_alternative(html, 'text/html')
+        msg.send(fail_silently=False)
+    except Exception:
+        logger.exception('Order confirmation email failed for %s', order.order_number)
+
+
 # ── POST /api/orders/payfast/initiate/  → generate PayFast payment data
 class PayFastInitiateView(APIView):
 
@@ -158,24 +194,25 @@ class PayFastInitiateView(APIView):
 
         order = get_object_or_404(Order, order_number=order_number)
 
-        base_url = config('FRONTEND_URL', default='https://smartfreezesa.onrender.com')
+        base_url = config('FRONTEND_URL', default='https://smartfreezesa.co.za').rstrip('/')
 
         data = {
-            'merchant_id':      PAYFAST_MERCHANT_ID,
-            'merchant_key':     PAYFAST_MERCHANT_KEY,
-            'return_url':       f'{base_url}/frontend/EndUser/payment-success.html?order={order_number}',
-            'cancel_url':       f'{base_url}/frontend/EndUser/payment-cancel.html?order={order_number}',
-            'notify_url':       f'{config("BACKEND_URL", default="https://smartfreezesa.onrender.com")}/api/orders/payfast/notify/',
-            'name_first':       order.name.split()[0],
-            'name_last':        order.name.split()[-1] if len(order.name.split()) > 1 else '',
-            'email_address':    order.email or '',
-            'cell_number':      order.phone,
-            'm_payment_id':     order_number,
-            'amount':           f'{order.total:.2f}',
-            'item_name':        f'SmartFreeze Order {order_number}',
+            'merchant_id':   PAYFAST_MERCHANT_ID,
+            'merchant_key':  PAYFAST_MERCHANT_KEY,
+            'return_url':    f'{base_url}/EndUser/payment-success.html?order={order_number}',
+            'cancel_url':    f'{base_url}/EndUser/payment-cancel.html?order={order_number}',
+            'notify_url':    f'{config("BACKEND_URL", default="https://smartfreezesa.onrender.com")}/api/orders/payfast/notify/',
+            'name_first':    order.name.split()[0],
+            'name_last':     order.name.split()[-1] if len(order.name.split()) > 1 else '',
+            'email_address': order.email or '',
+            'cell_number':   order.phone,
+            'm_payment_id':  order_number,
+            'amount':        f'{order.total:.2f}',
+            'item_name':     f'SmartFreeze Order {order_number}',
             'item_description': f'Fridge order - {order_number}',
         }
 
+        # generate signature
         signature = self._generate_signature(data)
         data['signature'] = signature
 
@@ -219,10 +256,13 @@ class PayFastNotifyView(APIView):
         try:
             order = Order.objects.get(order_number=order_number)
             if payment_status == 'COMPLETE':
+                already_paid = order.payment_status == 'paid'
                 order.payment_status = 'paid'
                 order.status         = 'confirmed'
                 order.save(update_fields=['payment_status', 'status'])
-                send_order_confirmation_email(order)
+                # PayFast can send the same ITN more than once - only mail once
+                if not already_paid:
+                    send_order_confirmation(order)
             elif payment_status == 'FAILED':
                 order.payment_status = 'failed'
                 order.save(update_fields=['payment_status'])
