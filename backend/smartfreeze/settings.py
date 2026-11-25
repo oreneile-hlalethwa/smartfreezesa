@@ -119,3 +119,19 @@ LANGUAGE_CODE = 'en-za'
 TIME_ZONE     = 'Africa/Johannesburg'
 USE_I18N      = True
 USE_TZ        = True
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {'class': 'logging.StreamHandler'},
+    },
+    'root': {'handlers': ['console'], 'level': 'INFO'},
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
