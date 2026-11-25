@@ -3,7 +3,7 @@
    Order lookup — Django API
    ════════════════════════════════ */
 
-const API = `${BASE_URL}`;
+const API = `${BASE_URL}/api/orders/`;
 
 /* Pre-fill order number if coming from checkout confirmation */
 window.addEventListener('DOMContentLoaded', () => {
