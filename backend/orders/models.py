@@ -21,18 +21,24 @@ class Order(models.Model):
         ('cod',    'Cash on Delivery'),
         ('online', 'Online / Card'),
     ]
+    PAYMENT_STATUS_CHOICES = [
+        ('unpaid', 'Unpaid'),
+        ('paid',   'Paid'),
+        ('failed', 'Failed'),
+    ]
 
-    order_number = models.CharField(max_length=30, unique=True, blank=True)
-    name         = models.CharField(max_length=120)
-    email        = models.EmailField()
-    phone        = models.CharField(max_length=20)
-    address      = models.TextField()
-    city         = models.CharField(max_length=80)
-    payment      = models.CharField(max_length=10, choices=PAYMENT_CHOICES, default='cod')
-    status       = models.CharField(max_length=20, choices=STATUS_CHOICES,  default='pending')
-    total        = models.PositiveIntegerField(default=0)
-    created_at   = models.DateTimeField(auto_now_add=True)
-    updated_at   = models.DateTimeField(auto_now=True)
+    order_number   = models.CharField(max_length=30, unique=True, blank=True)
+    name           = models.CharField(max_length=120)
+    email          = models.EmailField()
+    phone          = models.CharField(max_length=20)
+    address        = models.TextField()
+    city           = models.CharField(max_length=80)
+    payment        = models.CharField(max_length=10, choices=PAYMENT_CHOICES, default='cod')
+    payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUS_CHOICES, default='unpaid')
+    status         = models.CharField(max_length=20, choices=STATUS_CHOICES,  default='pending')
+    total          = models.PositiveIntegerField(default=0)
+    created_at     = models.DateTimeField(auto_now_add=True)
+    updated_at     = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created_at']

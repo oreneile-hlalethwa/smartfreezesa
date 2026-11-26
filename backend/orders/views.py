@@ -267,6 +267,9 @@ class PayFastNotifyView(APIView):
                 order.payment_status = 'failed'
                 order.save(update_fields=['payment_status'])
         except Order.DoesNotExist:
-            pass
+            logger.warning('ITN received for unknown order %s', order_number)
+        except Exception:
+            # PayFast retries for days on any non-200, so swallow and log.
+            logger.exception('ITN processing failed for %s', order_number)
 
         return Response({'status': 'ok'})
